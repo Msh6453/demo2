@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2018/7/25.
@@ -19,5 +20,10 @@ public class T_RecruitServiceImpl implements T_RecruitService {
     @Override
     public List<T_Recruit> getRecruits(T_Recruit t_recruit) {
         return trm.getRecruits(t_recruit);
+    }
+
+    @Override
+    public List<T_Recruit> get(Map<String, Object> data) {
+        return trm.get(data);
     }
 }

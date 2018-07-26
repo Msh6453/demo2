@@ -95,7 +95,7 @@
             <span id="s1">* 提示:【必填字段，不能少于3位】</span><br/>
             &nbsp;&nbsp;密码：<input id="n2" type="password" name="t_password"><br/>
             <span id="s2">* 提示:【必填字段，不能少于6位】</span><br/>
-            &nbsp;&nbsp;<input id="n3" type="submit" value="提交">   &nbsp;&nbsp;
+            &nbsp;&nbsp;<input id="n3" type="submit" value="提交">&nbsp;&nbsp;
             <a id="d4" href="index.jsp"><input type="button" value="返回登录"></a>
         </form>
         ${requestScope.re}

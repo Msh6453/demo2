@@ -8,5 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class Y_YController {
-
+@RequestMapping("/tourist")
+    public String tourist(){
+    return"tourist";
+    }
+    @RequestMapping("/exit")
+    public String exit(){
+        return"../../index";
+    }
 }

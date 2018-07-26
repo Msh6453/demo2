@@ -19,11 +19,12 @@ public class T_Resume implements Serializable {
     private String re_address;
     private String re_experience;
     private String re_skill;
+    private int t_id;
 
     public T_Resume() {
     }
 
-    public T_Resume(String re_name, int re_age, String re_sex, String re_birday, String re_major, String re_edu, String re_endtime, String re_hobby, int re_tel, String re_address, String re_experience, String re_skill) {
+    public T_Resume(String re_name, int re_age, String re_sex, String re_birday, String re_major, String re_edu, String re_endtime, String re_hobby, int re_tel, String re_address, String re_experience, String re_skill, int t_id) {
         this.re_name = re_name;
         this.re_age = re_age;
         this.re_sex = re_sex;
@@ -36,6 +37,15 @@ public class T_Resume implements Serializable {
         this.re_address = re_address;
         this.re_experience = re_experience;
         this.re_skill = re_skill;
+        this.t_id = t_id;
+    }
+
+    public int getT_id() {
+        return t_id;
+    }
+
+    public void setT_id(int t_id) {
+        this.t_id = t_id;
     }
 
     public int getRe_id() {

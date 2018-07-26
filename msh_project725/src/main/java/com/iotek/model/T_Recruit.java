@@ -16,11 +16,12 @@ public class T_Recruit implements Serializable {
     private String r_required;
     private String r_describer;
     private int r_state;
+    private String r_begintime;
 
     public T_Recruit() {
     }
 
-    public T_Recruit(String r_job, double r_pay, String r_address, int r_tel, String r_email, String r_experience, String r_required, String r_describer, int r_state) {
+    public T_Recruit(String r_job, double r_pay, String r_address, int r_tel, String r_email, String r_experience, String r_required, String r_describer, int r_state, String r_begintime) {
         this.r_job = r_job;
         this.r_pay = r_pay;
         this.r_address = r_address;
@@ -30,6 +31,7 @@ public class T_Recruit implements Serializable {
         this.r_required = r_required;
         this.r_describer = r_describer;
         this.r_state = r_state;
+        this.r_begintime = r_begintime;
     }
 
     public int getR_state() {
@@ -112,6 +114,14 @@ public class T_Recruit implements Serializable {
         this.r_describer = r_describer;
     }
 
+    public String getR_begintime() {
+        return r_begintime;
+    }
+
+    public void setR_begintime(String r_begintime) {
+        this.r_begintime = r_begintime;
+    }
+
     @Override
     public String toString() {
         return "T_Recruit{" +
@@ -125,6 +135,7 @@ public class T_Recruit implements Serializable {
                 ", r_required='" + r_required + '\'' +
                 ", r_describer='" + r_describer + '\'' +
                 ", r_state=" + r_state +
+                ", r_begintime='" + r_begintime + '\'' +
                 '}';
     }
 }

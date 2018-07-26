@@ -1,5 +1,6 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.iotek.model.T_Recruit" %><%--
+<%@ page import="com.iotek.model.T_Recruit" %>
+<%@ page import="com.iotek.model.T_Tourist" %><%--
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2018/7/25
@@ -29,35 +30,59 @@
         #d1{
             width: 100%;
             height: 50px;
+            background-color:rgba(0,0,0,0.2);
         }
         #d2{
-
-            width: 100%;
-            height: 800px;
+            margin:0 auto;
+            width: 1700px;
+            height: 750px;
             text-align: center;
-           background-color: cornflowerblue;
+            background-color: cornflowerblue;
         }
         #d3{
-            position:relative;
-          /*  background-color:rgba(0,0,0,0.2);*/
-            margin-top: -700px;
+            margin:0 auto;
+            position: absolute;
+            width: 1000px;
+            background-color:rgba(0,0,0,0.2);
+            margin-top: -600px;
+            margin-left: 350px;
+            z-index: 1;
 
         }
-
+        #da{
+            text-align: center;
+        }
+        span{
+            position: relative;
+        }
+        #d4{
+            margin-left: 1000px;
+        }
+        #a2{
+            text-decoration: none;
+            color: white;
+        }
     </style>
 </head>
 <%
     List<T_Recruit> tRecruits= (List<T_Recruit>) request.getAttribute("recruitlist");
+    int totalPages= (int) request.getAttribute("totalPages");
+    T_Tourist tourist= (T_Tourist) session.getAttribute("tour");
 %>
 <body>
+<div  id="da">
 <div id="d1">
     <h2>招聘信息</h2>
+    <div id="d4">
+    <span><a id="a2" href="exit">登录||注册</a>
+    </span>
+    </div>
 </div>
 <div id="d2">
     <img src="img/01.jpg">
 
 <div id="d3">
-    <table border=":solid 1px " bgcolor="#add8e6" style="margin:auto;">
+    <table border=":solid 1px "  style="margin:auto;">
         <tr>
             <th>ID</th>
             <th>工作岗位</th>
@@ -67,8 +92,9 @@
             <th>Email</th>
             <th>工作经验</th>
             <th>岗位需求</th>
+            <th>发布时间</th>
             <th>公司介绍及福利</th>
-            <th>投递简历</th>
+
 
         </tr>
             <%
@@ -84,15 +110,26 @@
             <td><%=tRecruits.get(i).getR_experience()%></td>
             <td><%=tRecruits.get(i).getR_required()%></td>
             <td><%=tRecruits.get(i).getR_describer()%></td>
-            <td><a href=""><input type="button" value="投递"></a></td>
+            <td><%=tRecruits.get(i).getR_begintime()%></td>
+            <%--<td><a href=""><input type="button" value="投递"></a></td>--%>
         </tr>
-            <%
+
+     <%
         }
     %>
+</table>
+     <%
+             for (int i = 1; i <=totalPages; i++) {
+      %>
+        <a href="recruit?currentPage=<%=i%>"><%=i%></a>
+    <%
+        }
+    %>
+
 </div>
 </div>
 
-
+</div>
 </body>
 </html>
 

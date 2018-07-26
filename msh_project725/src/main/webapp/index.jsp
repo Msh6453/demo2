@@ -47,7 +47,7 @@
 </head>
 <body>
 <div id="d1">
-    <a id="a1" href="recruit">首页</a><a id="a2" href="">员工登录</a>&nbsp;&nbsp;||&nbsp;&nbsp;<a id="a3" href="">管理员登录</a>
+    <a id="a1" href="recruit?currentPage=1">首页</a><a id="a2" href="">员工登录</a>&nbsp;&nbsp;||&nbsp;&nbsp;<a id="a3" href="">管理员登录</a>
 </div><br/>
 
 <div id="d2">
