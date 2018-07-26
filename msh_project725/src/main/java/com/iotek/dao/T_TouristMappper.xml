@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iotek.dao.T_TouristMappper">
+    <insert id="register">
+        INSERT INTO T_TOURIST(T_ID, T_NAME, T_PASSWORD) VALUES (SEQ_T.nextval,#{t_name},#{t_password})
+    </insert>
+
+    <select id="getLogin" resultType="com.iotek.model.T_Tourist">
+      SELECT * FROM T_TOURIST WHERE T_NAME=#{t_name} AND T_PASSWORD=#{t_password}
+    </select>
+    <select id="getTouristById" resultType="com.iotek.model.T_Tourist">
+       SELECT * FROM T_TOURIST WHERE T_NAME=#{t_name}
+    </select>
+</mapper>
