@@ -9,4 +9,7 @@
     SELECT  rownum rn,u.* FROM T_RECRUIT u where R_STATE=#{state})gd
     WHERE gd.rn BETWEEN #{currentPage} and #{pageSize}
     </select>
+    <select id="getByR_id" resultType="com.iotek.model.T_Recruit">
+        SELECT  * FROM  T_RECRUIT WHERE  R_ID=#{r_id}
+    </select>
 </mapper>

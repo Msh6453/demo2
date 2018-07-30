@@ -1,4 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.iotek.dao.T_ResumeMapper">
+    <insert id="saveResume">
+        INSERT INTO T_RESUME(RE_ID, RE_NAME, RE_AGE, RE_SEX, RE_BIRDAY,RE_MAJOR, RE_EDU,
+        RE_ENDTIME, RE_HOBBY, RE_TEL, RE_ADDRESS, RE_EXPERIENCE, RE_SKILL, T_ID)
+        VALUES (SEQ_RE.nextval,#{re_name},#{re_age},#{re_sex},#{re_birday},#{re_major},#{re_edu},
+        #{re_endtime},#{re_hobby},#{re_tel},#{re_address},#{re_experience},#{re_skill},#{t_id})
+    </insert>
+    <update id="updateResume">
+        UPDATE T_RESUME SET RE_NAME=#{re_name},RE_AGE=#{re_age}, RE_SEX=#{re_sex}, RE_BIRDAY=#{re_birday},
+        RE_MAJOR=#{re_major}, RE_EDU=#{re_edu},RE_ENDTIME=#{re_endtime}, RE_HOBBY=#{re_hobby},
+         RE_TEL=#{re_tel}, RE_ADDRESS=#{re_address}, RE_EXPERIENCE=#{re_experience},
+          RE_SKILL=#{re_skill} where RE_ID=#{re_id}
+    </update>
+    <delete id="deleteResume">
+        DELETE  FROM T_RESUME where RE_ID=#{re_id}
+    </delete>
+    <select id="getresume" resultType="com.iotek.model.T_Resume">
+        SELECT * FROM T_RESUME WHERE T_ID=#{t_id}
+    </select>
+    <select id="get" resultType="com.iotek.model.T_Resume">
+         SELECT * FROM (
+    SELECT  rownum rn,u.* FROM T_RESUME u where T_ID=#{tid})gd
+    WHERE gd.rn BETWEEN #{currentPage} and #{pageSize}
+    </select>
+    <select id="getRe" resultType="com.iotek.model.T_Resume">
+        SELECT * FROM T_RESUME WHERE RE_ID=#{re_id}
+    </select>
 </mapper>

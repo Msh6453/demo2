@@ -1,4 +1,6 @@
-<%--
+<%@ page import="com.iotek.model.T_Resume" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.sun.corba.se.spi.ior.IdentifiableFactory" %><%--
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2018/7/26
@@ -57,6 +59,7 @@
         }
         #dd1,#dd2{
             display: none;
+            text-align: center;
         }
         #d4{
             margin-left: 900px;
@@ -67,12 +70,18 @@
         }
         #a3,#a4{
             font-size: 20px;
+            text-decoration: none;
+            color: black;
         }
-        #te1,#te2{
+        #te1,#te2,#tel3,#tel4{
             resize: none;
         }
         td{
             text-align:center;
+        }
+        td{
+            word-wrap:break-word;
+            word-break: break-all;
         }
     </style>
     <script src="jq-resources/jquery.js"></script>
@@ -83,19 +92,20 @@
                 var reg = /\S/;
                 if (reg.test(p)) {
                     $("#n10").removeAttr("disabled")
-                    $("#n1").css('border','1px solid green');
+                    $("#n1").css('border','2px solid green');
                 } else {
                     $("#n10").attr("disabled", "a")
                     $("#n1").css('border','1px solid red');
                 }
             })
         })
+
         $(function () {
             $("#n2").blur(function () {
                 var p = $("#n2").val();
                 var reg = /^[1-9]\d*$/;
                 if (reg.test(p)) {
-                    $("#n2").css('border','1px solid green');
+                    $("#n2").css('border','2px solid green');
                     $("#n10").removeAttr("disabled")
                 } else {
                     $("#n2").css('border','1px solid red');
@@ -104,10 +114,140 @@
             })
         })
 
+        $(function () {
+            $("#n3").blur(function () {
+                var p = $("#n3").val();
+                var reg = /\S/;
+                if (reg.test(p)) {
+                    $("#n3").css('border','2px solid green');
+                    $("#n10").removeAttr("disabled")
+                } else {
+                    $("#n3").css('border','1px solid red');
+                    $("#n10").attr("disabled", "a")
+                }
+            })
+        })
+
+        $(function () {
+            $("#n4").blur(function () {
+                var p = $("#n4").val();
+                var reg = /\S/;
+                if (reg.test(p)) {
+                    $("#n4").css('border','2px solid green');
+                    $("#n10").removeAttr("disabled")
+                } else {
+                    $("#n4").css('border','1px solid red');
+                    $("#n10").attr("disabled", "a")
+                }
+            })
+        })
+
+        $(function () {
+            $("#n5").blur(function () {
+                var p = $("#n5").val();
+                var reg = /\S/;
+                if (reg.test(p)) {
+                    $("#n5").css('border','2px solid green');
+                    $("#n10").removeAttr("disabled")
+                } else {
+                    $("#n5").css('border','1px solid red');
+                    $("#n10").attr("disabled", "a")
+                }
+            })
+        })
+
+        $(function () {
+            $("#n6").blur(function () {
+                var p = $("#n6").val();
+                var reg = /\S/;
+                if (reg.test(p)) {
+                    $("#n6").css('border','2px solid green');
+                    $("#n10").removeAttr("disabled")
+                } else {
+                    $("#n6").css('border','1px solid red');
+                    $("#n10").attr("disabled", "a")
+                }
+            })
+        })
+
+        $(function () {
+            $("#n7").blur(function () {
+                var p = $("#n7").val();
+                var reg = /\S/;
+                if (reg.test(p)) {
+                    $("#n7").css('border','2px solid green');
+                    $("#n10").removeAttr("disabled")
+                } else {
+                    $("#n7").css('border','1px solid red');
+                    $("#n10").attr("disabled", "a")
+                }
+            })
+        })
+
+        $(function () {
+            $("#n8").blur(function () {
+                var p = $("#n8").val();
+                var reg = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
+                if (reg.test(p)) {
+                    $("#n8").css('border','2px solid green');
+                    $("#n10").removeAttr("disabled")
+                } else {
+                    $("#n8").css('border','1px solid red');
+                    $("#n10").attr("disabled", "a")
+                }
+            })
+        })
+
+        $(function () {
+            $("#n9").blur(function () {
+                var p = $("#n9").val();
+                var reg = /\S/;
+                if (reg.test(p)) {
+                    $("#n9").css('border','2px solid green');
+                    $("#n10").removeAttr("disabled")
+                } else {
+                    $("#n9").css('border','1px solid red');
+                    $("#n10").attr("disabled", "a")
+                }
+            })
+        })
+
+        $(function () {
+            $("#te1").blur(function () {
+                var p = $("#te1").val();
+                var reg = /\S/;
+                if (reg.test(p)) {
+                    $("#te1").css('border','2px solid green');
+                    $("#n10").removeAttr("disabled")
+                } else {
+                    $("#te1").css('border','1px solid red');
+                    $("#n10").attr("disabled", "a")
+                }
+            })
+        })
+
+        $(function () {
+            $("#te2").blur(function () {
+                var p = $("#te2").val();
+                var reg = /\S/;
+                if (reg.test(p)) {
+                    $("#te2").css('border','2px solid green');
+                    $("#n10").removeAttr("disabled")
+                } else {
+                    $("#te2").css('border','1px solid red');
+                    $("#n10").attr("disabled", "a")
+                }
+            })
+        })
     </script>
 
 </head>
 <body>
+<%
+    List<T_Resume> tr= (List<T_Resume>) request.getAttribute("tResumes");
+    int totalPages= (int) request.getAttribute("totalPages");
+
+%>
 <div  id="da">
     <div id="d1">
         <h2>个人中心</h2>
@@ -120,71 +260,147 @@
         <img src="img/01.jpg">
 
         <div id="d3">
-            <a id="a3" onclick="check('dd1','dd2')">查看简历</a> &nbsp;&nbsp; &nbsp;&nbsp;
+            <a id="a3" href="getresume?currentPage=1" onmouseenter="check('dd1','dd2')">查看简历</a> &nbsp;&nbsp; &nbsp;&nbsp;
             <a id="a4" onclick="check('dd2','dd1')">添加简历</a>
-            <div id="dd1">sdadada</div>
+            &nbsp;&nbsp; &nbsp;&nbsp;<a href="state1">查看面试邀请</a>
+            <div id="dd1">
+                <table border=":solid 1px "  style="margin:auto;">
+                    <tr>
+                        <th>姓名</th>
+                        <th>年龄</th>
+                        <th>性别 </th>
+                        <th>出生年月</th>
+                        <th>专业</th>
+                        <th>学历</th>
+                        <th>毕业时间</th>
+                        <th>爱好</th>
+                        <th>电话</th>
+                        <th>家庭住址</th>
+                        <th>工作经验</th>
+                        <th>专业技能</th>
+                        <th>修改</th>
+                        <th>删除</th>
+                    </tr>
+
+                    <%
+                        if (tr==null){
+
+                        }else{
+                            for (int i = 0; i < tr.size(); i++) {
+
+                    %>
+                    <tr>
+                        <td><%=tr.get(i).getRe_name()%></td>
+                        <td><%=tr.get(i).getRe_age()%></td>
+                        <td><%=tr.get(i).getRe_sex()%></td>
+                        <td><%=tr.get(i).getRe_birday()%></td>
+                        <td><%=tr.get(i).getRe_major()%></td>
+                        <td><%=tr.get(i).getRe_edu()%></td>
+                        <td><%=tr.get(i).getRe_endtime()%></td>
+                        <td><%=tr.get(i).getRe_hobby()%></td>
+                        <td><%=tr.get(i).getRe_tel()%></td>
+                        <td><%=tr.get(i).getRe_address()%></td>
+                        <td >
+                            <textarea id="tel4" name="re_experience"  cols="100" rows="10"
+                                       style="width:100px; height:50px"><%=tr.get(i).getRe_experience()%>
+                            </textarea>
+                        </td>
+                        <td  style="width: 30px">
+                            <textarea id="tel3" name="re_skill" cols="100" rows="10"
+                                      style="width:100px; height:50px"><%=tr.get(i).getRe_skill()%></textarea></td>
+                        <td><a href="updateresume1?re_id=<%=tr.get(i).getRe_id()%>"><button>修改</button></a></td>
+                        <td><a href="deleteresume?re_id=<%=tr.get(i).getRe_id()%>"><button>删除</button></a></td>
+                    </tr>
+                    <%
+                        }
+                        }
+                    %>
+                </table>
+                <%
+                    for (int i = 1; i <=totalPages; i++) {
+                %>
+                <a href="getresume?currentPage=<%=i%>"><%=i%></a>
+                <%
+                    }
+                %>
+                ${requestScope.noResumes}
+            </div>
             <div id="dd2">
                 <h3>添加简历</h3>
-                <form method="post" action="saveresume">
+
+                <form  method="post" action="saveResume">
+
                     <table border=":solid 1px "  style="margin:auto;">
+
                         <tr>
-                            <td>姓名 </td>
-                            <td><input id="n1" name="re_name"></td>
+                            <td>
+                                <label>姓名</label>
+                            </td>
+                            <td><input type="text" id="n1" name="re_name"></td>
                         </tr>
+
                         <tr>
-                            <td>年龄 </td>
-                            <td><input id="n2" name="re_age"></td>
+                            <td><label>年龄</label></td>
+                            <td><input type="text" id="n2" name="re_age"></td>
                         </tr>
-                        <tr>
-                            <td>性别 </td>
+
+                       <tr>
+                            <td><label>性别</label> </td>
                             <td><input type="radio" name="re_sex" checked="checked" value="男">男
                                 <input type="radio" name="re_sex"  value="女">女</td>
                         </tr>
-                        <tr>
-                            <td>出生年月</td>
+
+                       <tr>
+                            <td><label>出生年月</label></td>
                             <td><input id="n3" type="date" name="re_birday"></td>
                         </tr>
+
                         <tr>
-                            <td>专业</td>
-                            <td><input id="n4" name="re_major"></td>
+                           <td><label>专业</label></td>
+                           <td><input type="text" id="n4" name="re_major"></td>
+                       </tr>
+
+                       <tr>
+                           <td><label>学历</label></td>
+                           <td><input type="text" id="n5" name="re_edu"></td>
+                       </tr>
+                        <tr>
+                            <td><label>毕业时间</label></td>
+                            <td><input  id="n6" type="date" name="re_endtime"></td>
                         </tr>
+
                         <tr>
-                            <td>学历</td>
-                            <td><input id="n5" name="re_edu"></td>
+                            <td><label>爱好</label></td>
+                            <td><input type="text" id="n7" name="re_hobby"></td>
                         </tr>
+
                         <tr>
-                            <td>毕业时间</td>
-                            <td><input id="n6" type="date" name="re_endtime"></td>
+                             <td><label>电话</label></td>
+                             <td><input type="text" id="n8" name="re_tel"></td>
+                         </tr>
+                        <tr>
+                            <td><label>家庭住址</label></td>
+                            <td><input type="text" id="n9" name="re_address"></td>
                         </tr>
+
                         <tr>
-                            <td>爱好</td>
-                            <td><input id="n7" name="re_hobby"></td>
-                        </tr>
-                        <tr>
-                            <td>电话</td>
-                            <td><input id="n8" name="re_tel"></td>
-                        </tr>
-                        <tr>
-                            <td>家庭住址</td>
-                            <td><input id="n9" name="re_address"></td>
-                        </tr>
-                        <tr>
-                            <td>工作经验</td>
+                            <td><label>工作经验</label></td>
                             <td><textarea id="te1" name="re_experience"  cols="100" rows="10"
                                           style="width:200px; height:50px"></textarea></td>
                         </tr>
+
                         <tr>
-                            <td>专业技能</td>
+                            <td><label>专业技能</label></td>
                             <td><textarea id="te2" name="re_skill" cols="100" rows="10"
                                           style="width:200px; height:50px"></textarea></td>
                         </tr>
                     </table>
-                        <input id="n10" type="submit" value="提交">
+
+                        <input id="n10"  type="submit" value="提交">
                 </form>
             </div>
         </div>
     </div>
-
 </div>
 </body>
 </html>

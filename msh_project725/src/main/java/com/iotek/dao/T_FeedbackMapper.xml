@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iotek.dao.T_FeedbackMapper">
+    <insert id="saveFeedback">
+        INSERT  INTO T_FEEDBACK (F_ID, R_ID, RE_ID, F_BTIME, F_STATE, F_INTERVIEWTIME,T_ID)
+        VALUES (SEQ_F.nextval,#{r_id},#{re_id},#{f_btime},#{f_state},#{f_interviewtime},#{t_id})
+    </insert>
+    <update id="updateFeedBackState">
+        UPDATE T_FEEDBACK SET F_STATE=#{f_state} where F_ID=#{f_id}
+    </update>
+    <select id="getFeedbackByRe_id" resultType="com.iotek.model.T_Feedback">
+        SELECT * FROM T_FEEDBACK WHERE RE_ID=#{re_id}
+    </select>
+    <select id="getFeedbackState1" resultType="com.iotek.model.T_Feedback">
+        SELECT * FROM  T_FEEDBACK WHERE T_ID=#{t_id} and F_STATE=#{f_state}
+    </select>
+    <select id="getFeedbacks" resultType="com.iotek.model.T_Feedback">
+          SELECT * FROM (
+    SELECT  rownum rn,u.* FROM T_FEEDBACK u where F_STATE=#{state})gd
+    WHERE gd.rn BETWEEN #{currentPage} and #{pageSize}
+    </select>
+</mapper>

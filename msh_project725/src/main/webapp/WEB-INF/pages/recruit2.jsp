@@ -70,7 +70,7 @@
                 out.print("欢迎游客"+tourist.getT_name());
             }
         %>
-        </span>&nbsp;&nbsp; <span><a id="a1" href="tourist">个人中心</a></span>
+        </span>&nbsp;&nbsp; <span><a id="a1" href="getresume?currentPage=1">个人中心</a></span>
             &nbsp;&nbsp;<span><a id="a2" href="exit">退出</a></span>
         </div>
     </div>
@@ -107,7 +107,7 @@
                     <td><%=tRecruits.get(i).getR_required()%></td>
                     <td><%=tRecruits.get(i).getR_describer()%></td>
                     <td><%=tRecruits.get(i).getR_begintime()%></td>
-                    <td><a href=""><input type="button" value="投递"></a></td>
+                    <td><a href="saveFeedback1?r_id=<%=tRecruits.get(i).getR_id()%>"><input type="button" value="投递"></a></td>
                 </tr>
 
                 <%
@@ -117,14 +117,14 @@
             <%
                 for (int i = 1; i <=totalPages; i++) {
             %>
-            <a href="recruit?currentPage=<%=i%>"><%=i%></a>
+            <a href="recruit?currentPage=<%=i%>"><%=i%></a><br/>
             <%
                 }
             %>
-
+            ${requestScope.Feedback1}
+            ${requestScope.Feedback2}
         </div>
     </div>
-
 </div>
 </body>
 </html>

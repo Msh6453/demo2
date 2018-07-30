@@ -54,8 +54,6 @@ public class T_TouristController {
     @RequestMapping("/login")
     public String login(T_Tourist t_tourist, HttpServletRequest request, HttpSession session){
         T_Tourist tourist=ts.getLogin(t_tourist);
-
-
         if(t_tourist.getT_name()==""||t_tourist.getT_password()==""){
             request.setAttribute("tt","用户名密码不能为空");
 

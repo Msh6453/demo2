@@ -26,4 +26,9 @@ public class T_RecruitServiceImpl implements T_RecruitService {
     public List<T_Recruit> get(Map<String, Object> data) {
         return trm.get(data);
     }
+
+    @Override
+    public T_Recruit getByR_id(T_Recruit t_recruit) {
+        return trm.getByR_id(t_recruit);
+    }
 }

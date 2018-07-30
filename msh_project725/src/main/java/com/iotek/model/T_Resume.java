@@ -15,7 +15,7 @@ public class T_Resume implements Serializable {
     private String re_edu;
     private String re_endtime;
     private String re_hobby;
-    private int re_tel;
+    private String re_tel;
     private String re_address;
     private String re_experience;
     private String re_skill;
@@ -24,7 +24,7 @@ public class T_Resume implements Serializable {
     public T_Resume() {
     }
 
-    public T_Resume(String re_name, int re_age, String re_sex, String re_birday, String re_major, String re_edu, String re_endtime, String re_hobby, int re_tel, String re_address, String re_experience, String re_skill, int t_id) {
+    public T_Resume(String re_name, int re_age, String re_sex, String re_birday, String re_major, String re_edu, String re_endtime, String re_hobby, String re_tel, String re_address, String re_experience, String re_skill, int t_id) {
         this.re_name = re_name;
         this.re_age = re_age;
         this.re_sex = re_sex;
@@ -120,11 +120,11 @@ public class T_Resume implements Serializable {
         this.re_hobby = re_hobby;
     }
 
-    public int getRe_tel() {
+    public String getRe_tel() {
         return re_tel;
     }
 
-    public void setRe_tel(int re_tel) {
+    public void setRe_tel(String re_tel) {
         this.re_tel = re_tel;
     }
 

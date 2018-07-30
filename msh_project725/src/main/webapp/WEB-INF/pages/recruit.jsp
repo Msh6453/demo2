@@ -95,7 +95,6 @@
             <th>发布时间</th>
             <th>公司介绍及福利</th>
 
-
         </tr>
             <%
         for (int i = 0; i < tRecruits.size(); i++) {

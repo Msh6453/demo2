@@ -14,9 +14,54 @@
 <head>
     <base href="<%=basePath%>"/>
     <title></title>
+    <style>
+        #d1{
+            background-color: lightblue;
+            width:100%;
+            text-align: center;
+        }
+        #a1{
+            color: white;
+            text-decoration: none;
+            margin-right: 700px;
+        }
+        #a2,#a3,#d4{
+            color: white;
+            text-decoration: none;
+
+        }
+        #d2{
+            text-align: center;
+            background-color: skyblue;
+        }
+        #d3{
+            position:absolute;
+            left: 500px;
+            top: 400px;
+            width: 300px;
+            height: 200px;
+            text-align: center;
+            background-color:rgba(0,0,0,0.2);
+        }
+    </style>
 </head>
 <body>
+<div id="d1">
+    <a id="a1" href="recruit?currentPage=1">首页</a><a id="a2" href="">员工登录</a>&nbsp;&nbsp;||&nbsp;&nbsp;
+    <a id="a3" href="index1">游客登录</a>
+</div><br/>
 
+<div id="d2">
+    <img src="img/01.jpg">
+    <div id="d3">
+        <form method="post" action="managerlogin">
+            <p>管理员登录界面</p>
+            用户名：<input type="text" name="m_name"><br/><br/>
+            &nbsp;&nbsp;密码：<input type="password" name="m_password"><br/><br/>
+            &nbsp;&nbsp;<input type="submit" value="登录">
+        </form>
+    </div>
+</div>
 </body>
 </html>
 

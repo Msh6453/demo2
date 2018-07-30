@@ -13,4 +13,6 @@ public interface T_RecruitMapper {
     List<T_Recruit> getRecruits(T_Recruit t_recruit);
     //分页显示招聘信息
     List<T_Recruit> get(Map<String,Object> data);
+    //通过r_id查找招聘信息
+    T_Recruit getByR_id(T_Recruit t_recruit);
 }
