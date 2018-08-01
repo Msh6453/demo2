@@ -19,10 +19,15 @@ public class T_ManagerController {
     public String managerLogin(T_Manager t_manager, HttpServletRequest request)throws  Exception{
         if(t_manager.getM_name()==""||t_manager.getM_password()==""){
             request.setAttribute("tm","用户名密码不能为空");
-
-            return "manager/manager";
+            return "../../Login";
         }
-
-        return "manager/manager";
+        T_Manager t_manager1=tms.getManager(t_manager);
+        if (t_manager1!=null){
+            request.setAttribute("t_manager1",t_manager1);
+            return "manager/manager";
+        }else{
+            request.setAttribute("tm1","用户名密码错误");
+            return "../../Login";
+        }
     }
 }

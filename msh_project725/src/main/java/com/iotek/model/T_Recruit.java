@@ -10,7 +10,7 @@ public class T_Recruit implements Serializable {
     private String r_job;
     private double r_pay;
     private String r_address;
-    private int r_tel;
+    private String r_tel;
     private String r_email;
     private String r_experience;
     private String r_required;
@@ -21,7 +21,7 @@ public class T_Recruit implements Serializable {
     public T_Recruit() {
     }
 
-    public T_Recruit(String r_job, double r_pay, String r_address, int r_tel, String r_email, String r_experience, String r_required, String r_describer, int r_state, String r_begintime) {
+    public T_Recruit(String r_job, double r_pay, String r_address, String r_tel, String r_email, String r_experience, String r_required, String r_describer, int r_state, String r_begintime) {
         this.r_job = r_job;
         this.r_pay = r_pay;
         this.r_address = r_address;
@@ -74,11 +74,12 @@ public class T_Recruit implements Serializable {
         this.r_address = r_address;
     }
 
-    public int getR_tel() {
+
+    public String getR_tel() {
         return r_tel;
     }
 
-    public void setR_tel(int r_tel) {
+    public void setR_tel(String r_tel) {
         this.r_tel = r_tel;
     }
 
@@ -129,7 +130,7 @@ public class T_Recruit implements Serializable {
                 ", r_job='" + r_job + '\'' +
                 ", r_pay=" + r_pay +
                 ", r_address='" + r_address + '\'' +
-                ", r_tel=" + r_tel +
+                ", r_tel='" + r_tel + '\'' +
                 ", r_email='" + r_email + '\'' +
                 ", r_experience='" + r_experience + '\'' +
                 ", r_required='" + r_required + '\'' +

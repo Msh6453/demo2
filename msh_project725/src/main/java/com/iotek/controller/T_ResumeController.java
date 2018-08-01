@@ -1,9 +1,12 @@
 package com.iotek.controller;
 
+import com.iotek.model.T_Feedback;
 import com.iotek.model.T_Resume;
 import com.iotek.model.T_Tourist;
+import com.iotek.service.T_FeedbackService;
 import com.iotek.service.T_ResumeService;
 import com.iotek.service.T_TouristService;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import utils.DoPage;
@@ -22,6 +25,8 @@ import java.util.Map;
 public class T_ResumeController {
     @Resource
     private T_ResumeService ts;
+    @Resource
+    private T_FeedbackService tfs;
     @RequestMapping("/saveResume")
     public String save(T_Resume t_resume,HttpSession session, HttpServletRequest request)throws Exception{
         T_Tourist tourist= (T_Tourist) session.getAttribute("tour");
@@ -71,5 +76,29 @@ public class T_ResumeController {
         boolean falg=ts.deleteResume(t_resume);
         return "tourist";
     }
+    @RequestMapping("/getmresume")
+    public String getmresume(int a,int re_id,int f_read,int f_id,HttpServletRequest request)throws Exception{
 
+        T_Resume tResume=new T_Resume();
+        tResume.setRe_id(re_id);
+        T_Resume tResume1=ts.getRe(tResume);
+        //点击查看详情，判断f_read的状态，查看玩之后应该是已读状态f_read=1
+        T_Feedback tFeedback=new T_Feedback();
+        tFeedback.setF_read(1);
+        tFeedback.setF_id(f_id);
+        System.out.println(tFeedback);
+        if (f_read==0){
+            boolean falg=tfs.updateFeedBackRead(tFeedback);
+        }
+        request.setAttribute("tResume1",tResume1);
+        if (a==1){
+            return "manager/m_resume";
+        }else if (a==2){
+            return "manager/m_resume2";
+        }else{
+
+            return "manager/m_resume3";
+        }
+
+    }
 }

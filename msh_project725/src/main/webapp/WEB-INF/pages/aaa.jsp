@@ -40,39 +40,47 @@
         #da{
             text-align: center;
         }
+        #d4{
+            margin-left: 900px;
+        }
         span{
             position: relative;
+        }
+        #a1,#a2{
+            text-decoration: none;
+            color: white;
+        }
+        #a3,#a4{
+            font-size: 20px;
+            text-decoration: none;
+            color: black;
         }
     </style>
 </head>
 <body>
+<%
+    T_Manager tm= (T_Manager) request.getAttribute("t_manager1");
+%>
 <div  id="da">
     <div id="d1">
-        <h2>个人中心</h2>
+        <h2>管理员界面</h2>
+        <div id="d4"><span><%
+            if (tm!=null){
+                out.print("管理员"+tm.getM_name());
+            }
+        %>
+        </span>&nbsp;&nbsp; <span><a id="a1" href="getresume?currentPage=1">个人中心</a></span>
+            &nbsp;&nbsp;<span><a id="a2" href="exit1">退出</a></span>
+        </div>
     </div>
     <div id="d2">
         <img src="img/01.jpg">
 
         <div id="d3">
-            <table border=":solid 1px "  style="margin:auto;">
-                <tr>
-                    <th>ID</th>
-                    <th>工作岗位</th>
-                    <th>薪资</th>
-                    <th>工作地址</th>
-                    <th>联系电话</th>
-                    <th>Email</th>
-                    <th>工作经验</th>
-                    <th>岗位需求</th>
-                    <th>公司介绍及福利</th>
-                    <th>投递简历</th>
-
-                </tr>
-            </table>
+            <a id="a3" href="" >应聘中心</a> &nbsp;&nbsp; &nbsp;&nbsp;
+            <a id="a4" href="m_recruit" >招聘中心</a>
         </div>
     </div>
-
 </div>
 </body>
 </html>
-

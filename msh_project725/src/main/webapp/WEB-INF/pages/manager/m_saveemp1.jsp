@@ -1,12 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.util.List" %>
 <%@ page import="com.iotek.model.T_Feedback" %>
+<%@ page import="java.util.List" %>
 <%@ page import="com.iotek.service.T_RecruitService" %>
 <%@ page import="com.iotek.model.T_Recruit" %><%--
   Created by IntelliJ IDEA.
   User: Administrator
-  Date: 2018/7/30
-  Time: 8:51
+  Date: 2018/7/31
+  Time: 14:35
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -44,15 +44,20 @@
         #da{
             text-align: center;
         }
-        span{
-            position: relative;
-        }
         #d4{
             margin-left: 900px;
+        }
+        span{
+            position: relative;
         }
         #a1,#a2{
             text-decoration: none;
             color: white;
+        }
+        #a3,#a4{
+            font-size: 20px;
+            text-decoration: none;
+            color: black;
         }
         td{
             text-align: center;
@@ -61,31 +66,32 @@
 </head>
 <body>
 <%
-    List<T_Feedback> tf= (List<T_Feedback>) request.getAttribute("state1");
+    List<T_Feedback> tf= (List<T_Feedback>) request.getAttribute("state6");
+   /* int totalPages= (int) request.getAttribute("totalPages");*/
     T_RecruitService trs= (T_RecruitService) request.getAttribute("trs");
-
-    /*int totalPages= (int) request.getAttribute("totalPages");*/
 %>
+
+
 <div  id="da">
     <div id="d1">
-        <h2>面试邀请</h2>
-        <div id="d4">
-        &nbsp;&nbsp; <span><a id="a1" href="getresume?currentPage=1">个人中心</a></span>
-            &nbsp;&nbsp;<span><a id="a2" href="exit">退出</a></span>
+        <h2>添加员工</h2>
+        <div id="d4">&nbsp;&nbsp; <span><a id="a1" href="mananger">管理员界面</a></span>
+            &nbsp;&nbsp;<span><a id="a2" href="exit1">退出</a></span>
         </div>
     </div>
     <div id="d2">
         <img src="img/01.jpg">
+
         <div id="d3">
             <table border=":solid 1px "  style="margin:auto;">
                 <tr>
                     <th>ID</th>
                     <th>工作岗位</th>
-                    <th>面试时间</th>
-                    <th>面试地址</th>
-                    <th>联系电话</th>
-                    <th>接受面试</th>
-                    <th>拒绝面试</th>
+                    <th>查看简历</th>
+                    <th>投递时间</th>
+                    <th>是否查阅</th>
+                    <th>简历状态</th>
+                    <th>添加</th>
                 </tr>
                 <%
                     if (tf==null){
@@ -99,21 +105,51 @@
                 %>
                 <tr>
                     <td><%=tf.get(i).getF_id()%></td>
+
                     <td><%=tR.getR_job()%></td>
-                    <td><%=tf.get(i).getF_interviewtime()%></td>
-                    <td><%=tR.getR_address()%></td>
-                    <td><%=tR.getR_tel()%></td>
                     <td>
-                        <a href="updatestate34?state=4&f_id=<%=tf.get(i).getF_id()%>"><button >接受</button></a>
+                        <a href="getmresume?a=2&f_id=<%=tf.get(i).getF_id()%>&f_read=<%=tf.get(i).getF_read()%>
+                    &re_id=<%=tf.get(i).getRe_id()%>">查看详情</a>
+                    </td>
+                    <td><%=tf.get(i).getF_btime()%></td>
+                    <td>
+                        <%
+                            if (tf.get(i).getF_read()==1){
+                                out.print("已查阅");
+                            }else{
+                                out.print("未查阅");
+                            }
+                        %>
                     </td>
                     <td>
-                        <a href="updatestate34?state=3&f_id=<%=tf.get(i).getF_id()%>"><button >拒绝</button></a>
+                        <%
+                            if (tf.get(i).getF_state()==0){
+                                out.print("刚投递");
+                            }else if (tf.get(i).getF_state()==1){
+                                out.print("已邀请");
+                            }else if (tf.get(i).getF_state()==3){
+                                out.print("投递人拒绝面试");
+                            }else if (tf.get(i).getF_state()==4){
+                                out.print("投递人接受面试");
+                            }else if (tf.get(i).getF_state()==5){
+                                out.print("不符合条件");
+                            }else if (tf.get(i).getF_state()==6){
+                                out.print("已经录用");
+                            }else {
+                                out.print("未录用");
+                            }
+                        %>
+                    </td>
+                    <td>
+                        <a href="saveemp2?f_id=<%=tf.get(i).getF_id()%>"><button >新增</button></a>
                     </td>
                 </tr>
+
                 <%
                         }
                     }
                 %>
+
                 <tr>
                     <td colspan="7">
                         <c:forEach begin="1" end="${requestScope.totalPages}" var="pagesize">
@@ -121,18 +157,8 @@
                         </c:forEach>
                     </td>
                 </tr>
-               <%-- <%
-                    for (int i = 1; i <=totalPages; i++) {
-                %>
-                <a href="state1?currentPage=<%=i%>"><%=i%></a>
-                <%
-                    }
-                %>--%>
-
             </table>
-            ${requestScope.nostate1}<br/>
-            ${requestScope.state3}
-            ${requestScope.state4}
+            ${requestScope.temp}
         </div>
     </div>
 </div>

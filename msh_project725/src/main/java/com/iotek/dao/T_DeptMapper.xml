@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iotek.dao.T_DeptMapper">
+    <insert id="saveT_Dept">
+        INSERT INTO T_DEPT (D_ID, D_NAME) VALUES (SEQ_D.nextval,#{d_name})
+    </insert>
+    <update id="updateT_Dept">
+        UPDATE T_DEPT SET D_NAME=#{d_name} where D_ID=#{d_id}
+    </update>
+    <delete id="deleteT_Dept">
+        DELETE FROM T_DEPT WHERE D_ID=#{d_id}
+    </delete>
+    <select id="getTdeptAll" resultType="com.iotek.model.T_Dept">
+        SELECT * FROM T_DEPT
+    </select>
+    <select id="getT_deptsAll" resultType="com.iotek.model.T_Dept">
+        SELECT * FROM (
+    SELECT  rownum rn,u.* FROM T_DEPT u )gd
+    WHERE gd.rn BETWEEN #{currentPage} and #{pageSize}
+    </select>
+    <select id="getT_Dept" resultType="com.iotek.model.T_Dept">
+        SELECT * FROM T_DEPT WHERE D_NAME=#{d_name}
+    </select>
+    <select id="getT_DeptByid" resultType="com.iotek.model.T_Dept">
+        SELECT * FROM T_DEPT WHERE D_ID=#{d_id}
+    </select>
+</mapper>

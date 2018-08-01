@@ -18,8 +18,8 @@ public class T_FeedbackServiceImpl implements T_FeedbackService {
     private T_FeedbackMapper tfm;
 
     @Override
-    public T_Feedback getFeedbackByRe_id(T_Feedback t_feedback) {
-        return tfm.getFeedbackByRe_id(t_feedback);
+    public T_Feedback getFeedbackByR_id(T_Feedback t_feedback) {
+        return tfm.getFeedbackByR_id(t_feedback);
     }
 
     @Override
@@ -40,5 +40,40 @@ public class T_FeedbackServiceImpl implements T_FeedbackService {
     @Override
     public boolean updateFeedBackState(T_Feedback t_feedback) {
         return tfm.updateFeedBackState(t_feedback);
+    }
+
+    @Override
+    public List<T_Feedback> getFeedBacksAll() {
+        return tfm. getFeedBacksAll();
+    }
+
+    @Override
+    public List<T_Feedback> getFeedbacksByState0(Map<String, Object> data) {
+        return tfm.getFeedbacksByState0(data);
+    }
+
+    @Override
+    public boolean updateFeedBackRead(T_Feedback t_feedback) {
+        return tfm.updateFeedBackRead(t_feedback);
+    }
+
+    @Override
+    public T_Feedback getTF(T_Feedback t_feedback) {
+        return tfm.getTF(t_feedback);
+    }
+
+    @Override
+    public boolean updateFeedBackStateAndTime(T_Feedback t_feedback) {
+        return tfm.updateFeedBackStateAndTime(t_feedback);
+    }
+
+    @Override
+    public List<T_Feedback> getFeedBacksState4(T_Feedback t_feedback) {
+        return tfm.getFeedBacksState4(t_feedback);
+    }
+
+    @Override
+    public List<T_Feedback> getFeedbacksByState4(Map<String, Object> data) {
+        return tfm.getFeedbacksByState4(data);
     }
 }

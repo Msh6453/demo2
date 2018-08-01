@@ -1,8 +1,9 @@
-<%@ page import="com.iotek.model.T_Manager" %><%--
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
   Created by IntelliJ IDEA.
   User: Administrator
-  Date: 2018/7/30
-  Time: 10:22
+  Date: 2018/8/1
+  Time: 13:44
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -50,26 +51,22 @@
             text-decoration: none;
             color: white;
         }
-        #a3,#a4,#a5,#a6{
+        #a3,#a4{
             font-size: 20px;
             text-decoration: none;
             color: black;
         }
+        td{
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-<%
-    T_Manager tm= (T_Manager) request.getAttribute("t_manager1");
-%>
+
 <div  id="da">
     <div id="d1">
-        <h2>管理员界面</h2>
-        <div id="d4"><span><%
-            if (tm!=null){
-                out.print("管理员"+tm.getM_name());
-            }
-        %>
-        </span>&nbsp;&nbsp; <span><a id="a1" href="#">个人中心</a></span>
+        <h2>部门</h2>
+        <div id="d4">&nbsp;&nbsp; <span><a id="a1" href="m_deptAndposition">部门/职位</a></span>
             &nbsp;&nbsp;<span><a id="a2" href="exit1">退出</a></span>
         </div>
     </div>
@@ -77,14 +74,37 @@
         <img src="img/01.jpg">
 
         <div id="d3">
-            <a id="a3" href="m_feedback" >应聘中心</a> &nbsp;&nbsp; &nbsp;&nbsp;
-            <a id="a4" href="m_recruit" >招聘中心</a> &nbsp;&nbsp; &nbsp;&nbsp;
-            <a id="a5" href="saveemp1?currentPage=1" >添加员工</a>&nbsp;&nbsp; &nbsp;&nbsp;
-            <a id="a6" href="m_deptAndposition" >部门/职位</a>&nbsp;&nbsp; &nbsp;&nbsp;
-            <br/>
-            ${requestScope.nostate6}
+            <table border=":solid 1px "  style="margin:auto;">
+                <tr>
+                    <th>ID</th>
+                    <th>部门名称</th>
+                    <th>修改</th>
+                    <th>删除</th>
+                </tr>
+
+                <c:forEach items="${requestScope.tDepts}" var="d">
+                    <tr>
+                        <td>${d.d_id}</td>
+                        <td>${d.d_name}</td>
+                        <td>
+                            <a href="updateDept?d_id=${d.d_id}"><button >修改</button></a>
+                        </td>
+                        <td>
+                            <a href="deleteDept?d_id=${d.d_id}"><button >删除</button></a>
+                        </td>
+                    </tr>
+                </c:forEach>
+                <tr>
+                    <td colspan="4">
+                        <c:forEach begin="1" end="${requestScope.totalPages}" var="pagesize">
+                            <a href="getdept?currentPage=${pagesize}">${pagesize}</a>
+                        </c:forEach>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
 </body>
 </html>
+

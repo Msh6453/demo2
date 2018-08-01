@@ -63,15 +63,17 @@ public class T_FeedbackController {
         T_Feedback tFeedback=new T_Feedback();
         tFeedback.setT_id(tourist.getT_id());
         tFeedback.setF_state(0);
+        tFeedback.setF_read(0);
         tFeedback.setR_id(r_id);
         Date day=new Date();//获取当前时间
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String  btime=df.format(day);
         tFeedback.setF_btime(btime);
+        tFeedback.setF_interviewtime("0");
         tFeedback.setRe_id(re_id);
 
         //先要判断这份简历在之前是否投递过
-        if (tfs.getFeedbackByRe_id(tFeedback)!=null){
+        if (tfs.getFeedbackByR_id(tFeedback)!=null){
             request.setAttribute("Feedback1","已经投递过了！");
             int currentPage=1;
             return getRecruit(currentPage,request);
@@ -100,7 +102,9 @@ public class T_FeedbackController {
             data.put("currentPage",(currentPage-1)*PAGESIZE+1);
             data.put("pageSize",(currentPage) * PAGESIZE);
             int state=1;
+            int tid=tourist.getT_id();
             data.put("state",state);
+            data.put("tid",tid);
             List<T_Feedback> t_feedbacks1=tfs.getFeedbacks(data);
             request.setAttribute("state1",t_feedbacks1);
             request.setAttribute("totalPages",totalPages);
@@ -113,19 +117,19 @@ public class T_FeedbackController {
     }
     //对面试邀请的接受或者拒绝
     @RequestMapping("/updatestate34")
-    public String updatestate34(int state,int r_id,HttpServletRequest request,HttpSession session)throws Exception{
-        if (state==3){
+    public String updatestate34(int state,int f_id,HttpServletRequest request,HttpSession session)throws Exception{
+        if (state==4){
             T_Feedback tFeedback=new T_Feedback();
-            tFeedback.setF_state(3);
-            tFeedback.setF_id(r_id);
+            tFeedback.setF_state(4);
+            tFeedback.setF_id(f_id);
             boolean falg=tfs.updateFeedBackState(tFeedback);
             request.setAttribute("state3","准备面试，不要迟到！");
             int currentPage=1;
             return state1( currentPage,session,request);
         }else{
             T_Feedback tFeedback=new T_Feedback();
-            tFeedback.setF_state(4);
-            tFeedback.setF_id(r_id);
+            tFeedback.setF_state(3);
+            tFeedback.setF_id(f_id);
             boolean falg=tfs.updateFeedBackState(tFeedback);
             request.setAttribute("state4","感谢您对本公司的支持！");
             int currentPage=1;

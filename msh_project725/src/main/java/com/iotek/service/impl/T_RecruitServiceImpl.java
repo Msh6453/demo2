@@ -31,4 +31,39 @@ public class T_RecruitServiceImpl implements T_RecruitService {
     public T_Recruit getByR_id(T_Recruit t_recruit) {
         return trm.getByR_id(t_recruit);
     }
+
+    @Override
+    public List<T_Recruit> getm_Recruits() {
+        return trm.getm_Recruits();
+    }
+
+    @Override
+    public List<T_Recruit> getM(Map<String, Object> data) {
+        return trm.getM(data);
+    }
+
+    @Override
+    public boolean updateRecruitsState(T_Recruit t_recruit) {
+        return trm.updateRecruitsState(t_recruit);
+    }
+
+    @Override
+    public boolean updateRecruitsStateAndBtime(T_Recruit t_recruit) {
+        return trm.updateRecruitsStateAndBtime(t_recruit);
+    }
+
+    @Override
+    public boolean updateRecruits(T_Recruit t_recruit) {
+        return trm.updateRecruits(t_recruit);
+    }
+
+    @Override
+    public boolean deleteRecruits(T_Recruit t_recruit) {
+        return trm.deleteRecruits(t_recruit);
+    }
+
+    @Override
+    public boolean saveRecruits(T_Recruit t_recruit) {
+        return trm.saveRecruits(t_recruit);
+    }
 }

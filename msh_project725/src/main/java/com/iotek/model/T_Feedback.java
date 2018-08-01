@@ -12,17 +12,20 @@ public class T_Feedback implements Serializable {
     private int t_id;
     private String f_btime;
     private String f_interviewtime;//面试时间
-    private int f_state;//0已投递，1获得面试邀请，3拒绝面试，4接受面试
+    private int f_state;//0已投递，1获得面试邀请，3拒绝面试，4接受面试，5不给面试邀请,6 录用 ，7拒绝录用
+    private int f_read;//0管理员未读的状态，1是管理员已读状态
 
-    public T_Feedback(int r_id, int re_id, String f_btime, String f_interviewtime, int f_state) {
+    public T_Feedback() {
+    }
+
+    public T_Feedback(int r_id, int re_id, int t_id, String f_btime, String f_interviewtime, int f_state, int f_read) {
         this.r_id = r_id;
         this.re_id = re_id;
+        this.t_id = t_id;
         this.f_btime = f_btime;
         this.f_interviewtime = f_interviewtime;
         this.f_state = f_state;
-    }
-
-    public T_Feedback() {
+        this.f_read = f_read;
     }
 
     public int getF_id() {
@@ -81,6 +84,14 @@ public class T_Feedback implements Serializable {
         this.t_id = t_id;
     }
 
+    public int getF_read() {
+        return f_read;
+    }
+
+    public void setF_read(int f_read) {
+        this.f_read = f_read;
+    }
+
     @Override
     public String toString() {
         return "T_Feedback{" +
@@ -91,6 +102,7 @@ public class T_Feedback implements Serializable {
                 ", f_btime='" + f_btime + '\'' +
                 ", f_interviewtime='" + f_interviewtime + '\'' +
                 ", f_state=" + f_state +
+                ", f_read=" + f_read +
                 '}';
     }
 }

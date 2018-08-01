@@ -58,7 +58,9 @@
             <p>管理员登录界面</p>
             用户名：<input type="text" name="m_name"><br/><br/>
             &nbsp;&nbsp;密码：<input type="password" name="m_password"><br/><br/>
-            &nbsp;&nbsp;<input type="submit" value="登录">
+            &nbsp;&nbsp;<input type="submit" value="登录"><br/>
+            ${requestScope.tm}
+            ${requestScope.tm1}
         </form>
     </div>
 </div>

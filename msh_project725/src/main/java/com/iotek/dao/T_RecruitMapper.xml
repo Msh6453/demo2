@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.iotek.dao.T_RecruitMapper">
+    <insert id="saveRecruits">
+        INSERT INTO T_RECRUIT(R_ID, R_JOB,R_PAY, R_ADDRESS, R_TEL, R_EMAIL, R_EXPERIENCE, R_REQUIRED, R_DESCRIBER, R_STATE, R_BEGINTIME)
+        VALUES (SEQ_R.nextval,#{r_job},#{r_pay},#{r_address},#{r_tel},#{r_email},#{r_experience},#{r_required},#{r_describer},#{r_state},#{r_begintime})
+    </insert>
+    <update id="updateRecruitsState">
+        UPDATE T_RECRUIT SET R_STATE=#{r_state} where R_ID=#{r_id}
+    </update>
+    <update id="updateRecruits">
+         UPDATE T_RECRUIT SET R_PAY=#{r_pay},R_ADDRESS=#{r_address},R_TEL=#{r_tel},R_EMAIL=#{r_email},
+         R_EXPERIENCE=#{r_experience},R_REQUIRED=#{r_required},R_DESCRIBER=#{r_describer}
+         WHERE R_ID=#{r_id}
+    </update>
+    <update id="updateRecruitsStateAndBtime">
+         UPDATE T_RECRUIT SET R_STATE=#{r_state},R_BEGINTIME=#{r_begintime} where R_ID=#{r_id}
+    </update>
+    <delete id="deleteRecruits">
+        DELETE FROM T_RECRUIT WHERE R_ID=#{r_id}
+    </delete>
     <select id="getRecruits" resultType="com.iotek.model.T_Recruit">
         SELECT * FROM T_RECRUIT where R_STATE=#{r_state}
     </select>
@@ -11,5 +29,13 @@
     </select>
     <select id="getByR_id" resultType="com.iotek.model.T_Recruit">
         SELECT  * FROM  T_RECRUIT WHERE  R_ID=#{r_id}
+    </select>
+    <select id="getm_Recruits" resultType="com.iotek.model.T_Recruit">
+        SELECT * FROM T_RECRUIT
+    </select>
+    <select id="getM" resultType="com.iotek.model.T_Recruit">
+        SELECT * FROM (
+    SELECT  rownum rn,u.* FROM T_RECRUIT u )gd
+    WHERE gd.rn BETWEEN #{currentPage} and #{pageSize}
     </select>
 </mapper>

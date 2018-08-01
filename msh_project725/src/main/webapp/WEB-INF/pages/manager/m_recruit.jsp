@@ -1,8 +1,8 @@
-<%@ page import="com.iotek.model.T_Manager" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2018/7/30
-  Time: 10:22
+  Time: 11:26
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -50,7 +50,7 @@
             text-decoration: none;
             color: white;
         }
-        #a3,#a4,#a5,#a6{
+        #a3,#a4{
             font-size: 20px;
             text-decoration: none;
             color: black;
@@ -58,18 +58,12 @@
     </style>
 </head>
 <body>
-<%
-    T_Manager tm= (T_Manager) request.getAttribute("t_manager1");
-%>
+
 <div  id="da">
     <div id="d1">
-        <h2>管理员界面</h2>
-        <div id="d4"><span><%
-            if (tm!=null){
-                out.print("管理员"+tm.getM_name());
-            }
-        %>
-        </span>&nbsp;&nbsp; <span><a id="a1" href="#">个人中心</a></span>
+        <h2>招聘中心</h2>
+        <div id="d4">
+            &nbsp;&nbsp; <span><a id="a1" href="mananger">管理员界面</a></span>
             &nbsp;&nbsp;<span><a id="a2" href="exit1">退出</a></span>
         </div>
     </div>
@@ -77,14 +71,14 @@
         <img src="img/01.jpg">
 
         <div id="d3">
-            <a id="a3" href="m_feedback" >应聘中心</a> &nbsp;&nbsp; &nbsp;&nbsp;
-            <a id="a4" href="m_recruit" >招聘中心</a> &nbsp;&nbsp; &nbsp;&nbsp;
-            <a id="a5" href="saveemp1?currentPage=1" >添加员工</a>&nbsp;&nbsp; &nbsp;&nbsp;
-            <a id="a6" href="m_deptAndposition" >部门/职位</a>&nbsp;&nbsp; &nbsp;&nbsp;
-            <br/>
-            ${requestScope.nostate6}
+            <a id="a3" href="getm_recruit?currentPage=1">查看招聘信息</a> &nbsp;&nbsp; &nbsp;&nbsp;
+            <a id="a4" href="savem_recruit1">添加招聘信息</a>
+            ${requestScope.norecruits}<br/>
+            ${requestScope.save2}
         </div>
     </div>
 </div>
 </body>
 </html>
+
+

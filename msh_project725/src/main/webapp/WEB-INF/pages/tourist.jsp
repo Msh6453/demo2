@@ -68,7 +68,7 @@
             text-decoration: none;
             color: white;
         }
-        #a3,#a4{
+        #a3,#a4,#a5{
             font-size: 20px;
             text-decoration: none;
             color: black;
@@ -262,7 +262,7 @@
         <div id="d3">
             <a id="a3" href="getresume?currentPage=1" onmouseenter="check('dd1','dd2')">查看简历</a> &nbsp;&nbsp; &nbsp;&nbsp;
             <a id="a4" onclick="check('dd2','dd1')">添加简历</a>
-            &nbsp;&nbsp; &nbsp;&nbsp;<a href="state1">查看面试邀请</a>
+            &nbsp;&nbsp; &nbsp;&nbsp;<a id="a5" href="state1?currentPage=1">查看面试邀请</a>
             <div id="dd1">
                 <table border=":solid 1px "  style="margin:auto;">
                     <tr>
