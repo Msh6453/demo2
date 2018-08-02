@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2018/8/1
-  Time: 13:33
+  Time: 23:46
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -61,7 +61,7 @@
 
 <div  id="da">
     <div id="d1">
-        <h2>部门/职位管理界面</h2>
+        <h2>员工管理界面</h2>
         <div id="d4">&nbsp;&nbsp; <span><a id="a1" href="mananger">管理员界面</a></span>
             &nbsp;&nbsp;<span><a id="a2" href="exit1">退出</a></span>
         </div>
@@ -70,12 +70,9 @@
         <img src="img/01.jpg">
 
         <div id="d3">
-            <a id="a3" href="getdept?currentPage=1" >查看部门</a> &nbsp;&nbsp; &nbsp;&nbsp;
-            <a id="a4" href="savedept" >添加部门</a>&nbsp;&nbsp; &nbsp;&nbsp;
-            <a id="a5" href="getpos?currentPage=1" >查看职位</a>&nbsp;&nbsp; &nbsp;&nbsp;
-            <a id="a6" href="savepos1" >添加职位</a>
-            ${requestScope.nodept}
-            ${requestScope.noposition}
+            <a id="a3" href="getT_Emp?currentPage=1" >查看员工</a> &nbsp;&nbsp; &nbsp;&nbsp;
+            <a id="a4" href="saveemp1?currentPage=1" >添加员工</a>&nbsp;&nbsp; &nbsp;&nbsp;
+            ${requestScope.noemp}
         </div>
     </div>
 </div>

@@ -1,8 +1,9 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2018/8/1
-  Time: 13:33
+  Time: 20:10
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -50,19 +51,36 @@
             text-decoration: none;
             color: white;
         }
-        #a3,#a4,#a5,#a6{
+        #a3,#a4{
             font-size: 20px;
             text-decoration: none;
             color: black;
         }
     </style>
+    <script src="jq-resources/jquery.js"></script>
+    <script>
+        $(function () {
+            $("#n1").blur(function () {
+                var p = $("#n1").val();
+                var reg = /\S/;
+                if (reg.test(p)) {
+                    $("#n10").removeAttr("disabled")
+                    $("#n1").css('border','2px solid green');
+                } else {
+                    $("#n10").attr("disabled", "a")
+                    $("#n1").css('border','1px solid red');
+                }
+            })
+        })
+    </script>
 </head>
 <body>
 
+
 <div  id="da">
     <div id="d1">
-        <h2>部门/职位管理界面</h2>
-        <div id="d4">&nbsp;&nbsp; <span><a id="a1" href="mananger">管理员界面</a></span>
+        <h2>职位添加界面</h2>
+        <div id="d4">&nbsp;&nbsp; <span><a id="a1" href="m_deptAndposition">部门/职位</a></span>
             &nbsp;&nbsp;<span><a id="a2" href="exit1">退出</a></span>
         </div>
     </div>
@@ -70,16 +88,22 @@
         <img src="img/01.jpg">
 
         <div id="d3">
-            <a id="a3" href="getdept?currentPage=1" >查看部门</a> &nbsp;&nbsp; &nbsp;&nbsp;
-            <a id="a4" href="savedept" >添加部门</a>&nbsp;&nbsp; &nbsp;&nbsp;
-            <a id="a5" href="getpos?currentPage=1" >查看职位</a>&nbsp;&nbsp; &nbsp;&nbsp;
-            <a id="a6" href="savepos1" >添加职位</a>
-            ${requestScope.nodept}
-            ${requestScope.noposition}
+            <form method="post" action="savePos2">
+                <select id="dept" name="d_id">
+                    <option>请选择部门</option>
+                    <c:forEach items="${requestScope.tD}" var="d">
+                        <option   value="${d.d_id}" id="dept1">${d.d_name}</option>
+                    </c:forEach>
+                </select>
+                职位名称：<input id="n1" type="text" name="p_name">
+
+                <input id="n10" type="submit" value="提交">
+            </form>
+            ${requestScope.nod_id}
+            ${requestScope.yespos}
         </div>
     </div>
 </div>
 </body>
 </html>
-
 

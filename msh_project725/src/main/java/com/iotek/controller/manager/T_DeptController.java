@@ -77,7 +77,7 @@ public class T_DeptController {
             tDept.setD_id(d_id);
             boolean falg=tds.deleteT_Dept(tDept);
             return getTdeptsAll( currentPage, request);
-        }
+    }
     }
     //跳转部门信息添加页面
     @RequestMapping("/savedept")

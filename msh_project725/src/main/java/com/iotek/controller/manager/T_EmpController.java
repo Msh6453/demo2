@@ -1,9 +1,6 @@
 package com.iotek.controller.manager;
 
-import com.iotek.model.T_Dept;
-import com.iotek.model.T_Emp;
-import com.iotek.model.T_Feedback;
-import com.iotek.model.T_Resume;
+import com.iotek.model.*;
 import com.iotek.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +9,7 @@ import utils.DoPage;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -28,7 +26,8 @@ public class T_EmpController {
     private T_RecruitService trs;
     @Resource
     private T_DeptService tds;
-
+    @Resource
+    private T_PositionService tps;
     @Resource
     private T_ResumeService ts;
     //转跳添加员工界面
@@ -61,7 +60,8 @@ public class T_EmpController {
 
     //跳转员工新增页面
     @RequestMapping("/saveemp2")
-    public  String saveemp2(int f_id ,HttpServletRequest request){
+    public  String saveemp2(int f_id , HttpServletRequest request, HttpSession session){
+        session.setAttribute("f_id",f_id);
         //先找出简历id，通过简历id找出员工所有基本信息，让添加页面显示员工基本信息
         T_Feedback tFeedback1=new T_Feedback();
         tFeedback1.setF_id(f_id);
@@ -78,11 +78,14 @@ public class T_EmpController {
     }
 
     @RequestMapping("/saveemp3")
-    public String saveemp3(T_Emp t_emp,HttpServletRequest request){
+    public String saveemp3(T_Emp t_emp,HttpServletRequest request,HttpSession session){
         //需要注意的的地方是当员工开始新增的时候，需要将t_feedback的state状态改变为8
         //state=8表示该员工已经录取了，不改变的话它的状态一直是state=6；那么它就会一直存在
         //于添加员工（页面）的里面，就会产生一直可以添加，这是错误的
-
+        int f_id= (int) session.getAttribute("f_id");
+        int state=8;
+        T_Feedback tFeedback1=new T_Feedback();
+        boolean falg1=tfs.updateFeedBackState(tFeedback1);
 
 
         Date day=new Date();//获取当前时间
@@ -98,4 +101,61 @@ public class T_EmpController {
         int currentPage=1;
         return saveemp1( currentPage, request);
     }
+    //查看所有员工
+    @RequestMapping("/getT_Emp")
+    public String getT_Emp(int currentPage,HttpServletRequest request)throws Exception{
+        List<T_Emp> tEmps=tes.getT_Emps();
+        if (tEmps.size()!=0) {
+            int totalRows = tEmps.size();
+            int totalPages = DoPage.getTotalPages(totalRows);//总页数
+            final int PAGESIZE = 5;
+
+            Map<String, Object> data = new HashMap<>();
+            data.put("currentPage", (currentPage - 1) * PAGESIZE + 1);
+            data.put("pageSize", (currentPage) * PAGESIZE);
+
+
+            List<T_Emp> t_emps = tes.getT_EmpsAll(data);
+            request.setAttribute("temp", t_emps);
+            request.setAttribute("tps",tps);
+            request.setAttribute("tds",tds);
+            request.setAttribute("totalPages",totalPages);
+            return "manager/m_getemp";
+        }else{
+            request.setAttribute("noemp","暂时没有任何员工");
+            return "manager/m_emp";
+        }
+    }
+    //删除员工就是 将其状态改为离职状态
+    @RequestMapping("/deleteemp")
+    public String deleteemp(int  e_state,int e_id, HttpServletRequest request)throws Exception{
+        int currentPage=1;
+        if (e_state==3){
+            request.setAttribute("state3","该员工已经离职了");
+
+            return  getT_Emp( currentPage, request);
+        }
+        T_Emp tEmp=new T_Emp();
+        tEmp.setE_state(e_state);
+        tEmp.setE_id(e_id);
+        boolean falg=tes.updateT_EmpState(tEmp);
+        return  getT_Emp( currentPage, request);
+    }
+    //基本信息的修改
+    @RequestMapping("/updateemp1")
+    public String updateemp1(int e_id,HttpServletRequest request){
+        T_Emp t=new T_Emp();
+        t.setE_id(e_id);
+        T_Emp tEmp=tes.getT_Emp(t);
+        request.setAttribute("tEmp",tEmp);
+        return "manager/m_updateEmp";
+    }
+    //修改代码
+    @RequestMapping("/updateemp2")
+    public String updateemp2(T_Emp t_emp,HttpServletRequest request)throws Exception{
+        boolean falg=tes.updateT_Emp(t_emp);
+        int currentPage=1;
+        return  getT_Emp( currentPage, request);
+    }
+
 }

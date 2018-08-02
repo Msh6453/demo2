@@ -79,7 +79,7 @@
         <div id="d3">
             <a id="a3" href="m_feedback" >应聘中心</a> &nbsp;&nbsp; &nbsp;&nbsp;
             <a id="a4" href="m_recruit" >招聘中心</a> &nbsp;&nbsp; &nbsp;&nbsp;
-            <a id="a5" href="saveemp1?currentPage=1" >添加员工</a>&nbsp;&nbsp; &nbsp;&nbsp;
+            <a id="a5" href="m_emp" >员工管理</a>&nbsp;&nbsp; &nbsp;&nbsp;
             <a id="a6" href="m_deptAndposition" >部门/职位</a>&nbsp;&nbsp; &nbsp;&nbsp;
             <br/>
             ${requestScope.nostate6}
