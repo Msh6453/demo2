@@ -8,8 +8,22 @@ import java.io.Serializable;
 public class T_Dept implements Serializable {
     private int d_id;
     private String d_name;
+    private String d_btime;
 
     public T_Dept() {
+    }
+
+    public T_Dept(String d_name, String d_btime) {
+        this.d_name = d_name;
+        this.d_btime = d_btime;
+    }
+
+    public String getD_btime() {
+        return d_btime;
+    }
+
+    public void setD_btime(String d_btime) {
+        this.d_btime = d_btime;
     }
 
     public T_Dept(String d_name) {
@@ -37,6 +51,7 @@ public class T_Dept implements Serializable {
         return "T_Dept{" +
                 "d_id=" + d_id +
                 ", d_name='" + d_name + '\'' +
+                ", d_btime='" + d_btime + '\'' +
                 '}';
     }
 }

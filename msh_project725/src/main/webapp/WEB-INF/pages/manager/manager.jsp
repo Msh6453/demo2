@@ -50,7 +50,7 @@
             text-decoration: none;
             color: white;
         }
-        #a3,#a4,#a5,#a6{
+        #a3,#a4,#a5,#a6,#a7{
             font-size: 20px;
             text-decoration: none;
             color: black;
@@ -81,6 +81,7 @@
             <a id="a4" href="m_recruit" >招聘中心</a> &nbsp;&nbsp; &nbsp;&nbsp;
             <a id="a5" href="m_emp" >员工管理</a>&nbsp;&nbsp; &nbsp;&nbsp;
             <a id="a6" href="m_deptAndposition" >部门/职位</a>&nbsp;&nbsp; &nbsp;&nbsp;
+            <a id="a7" href="m_train" >培训中心</a>&nbsp;&nbsp; &nbsp;&nbsp;
             <br/>
             ${requestScope.nostate6}
         </div>

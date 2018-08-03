@@ -59,6 +59,8 @@ public class T_PositionController {
             request.setAttribute("t_positions", t_positions);
             request.setAttribute("tds",tds);
             request.setAttribute("totalPages",totalPages);
+
+
             return "manager/m_getPositions";
         }else{
             request.setAttribute("noposition","还没有添加任何职位");

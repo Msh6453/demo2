@@ -9,6 +9,7 @@ public class T_Position implements Serializable {
     private int p_id;
     private String p_name;
     private int d_id;
+    private double p_pay;
 
     public T_Position() {
     }
@@ -16,6 +17,14 @@ public class T_Position implements Serializable {
     public T_Position(String p_name, int d_id) {
         this.p_name = p_name;
         this.d_id = d_id;
+    }
+
+    public double getP_pay() {
+        return p_pay;
+    }
+
+    public void setP_pay(double p_pay) {
+        this.p_pay = p_pay;
     }
 
     public int getP_id() {
@@ -48,6 +57,7 @@ public class T_Position implements Serializable {
                 "p_id=" + p_id +
                 ", p_name='" + p_name + '\'' +
                 ", d_id=" + d_id +
+                ", p_pay=" + p_pay +
                 '}';
     }
 }

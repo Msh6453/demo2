@@ -10,6 +10,8 @@ import utils.DoPage;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,6 +91,12 @@ public class T_DeptController {
     public String saveDept1(String d_name,HttpServletRequest request)throws Exception{
         T_Dept tDept=new T_Dept();
         tDept.setD_name(d_name);
+        //产生部门建立时间
+        Date day=new Date();//获取当前时间
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String  btime=df.format(day);
+        System.out.println(btime);
+        tDept.setD_btime(btime);
         T_Dept tDept1=tds.getT_Dept(tDept);
         System.out.println(tDept);
         if (tDept1!=null){

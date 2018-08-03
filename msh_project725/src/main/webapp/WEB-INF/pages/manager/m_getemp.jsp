@@ -135,7 +135,7 @@
 
                     %></td>
                     <td>
-                        <a href="updateemp1?e_id=<%=t.get(i).getE_id()%>"><button >修改</button></a>
+                        <a href="updateemp1?e_id=<%=t.get(i).getE_id()%>"><button >换岗</button></a>
                     </td>
                     <td>
                         <a href="deleteemp?e_state=<%=t.get(i).getE_state()%>&e_id=<%=t.get(i).getE_id()%>"><button >删除</button></a>

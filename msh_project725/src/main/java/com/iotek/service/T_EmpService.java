@@ -23,7 +23,7 @@ public interface T_EmpService {
 
     //通过e_id查找员工信息
     T_Emp getT_Emp(T_Emp t_emp);
-    //修改员工信息，只是修改基本信息
+    //换岗状态
     boolean updateT_Emp(T_Emp t_emp);
     //修改state的状态
     boolean updateT_EmpState(T_Emp t_emp);
@@ -32,4 +32,6 @@ public interface T_EmpService {
     //员工状态
     //员工登录
     T_Emp getEmpByNumAndPassword(T_Emp t_emp);
+    //查找试用期的员工
+    List<T_Emp> getEmpByState0(T_Emp t_emp);
 }

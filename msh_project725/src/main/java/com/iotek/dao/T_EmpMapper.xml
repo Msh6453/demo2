@@ -6,7 +6,7 @@
         VALUES (SEQ_EMP.nextval,#{e_num},#{e_password},#{e_name},#{e_age},#{e_sex},#{e_btime},#{d_id},#{p_id},#{e_state},#{e_tel},#{e_address})
     </insert>
     <update id="updateT_Emp">
-        UPDATE T_EMP SET E_NAME=#{e_name},E_AGE=#{e_age},E_SEX=#{e_sex},E_TEL=#{e_tel},E_ADDRESS=#{e_address} WHERE E_ID=#{e_id}
+        UPDATE T_EMP SET D_ID=#{d_id},P_ID=#{p_id} WHERE E_ID=#{e_id}
     </update>
     <update id="updateT_EmpState">
         UPDATE T_EMP SET E_STATE=#{e_state} WHERE E_ID=#{e_id}
@@ -30,5 +30,8 @@
     </select>
     <select id="getEmpByNumAndPassword" resultType="com.iotek.model.T_Emp">
         SELECT * FROM  T_EMP WHERE E_NUM=#{e_num} and E_PASSWORD=#{e_password}
+    </select>
+    <select id="getEmpByState0" resultType="com.iotek.model.T_Emp">
+        SELECT * FROM  T_EMP WHERE E_STATE=#{e_state}
     </select>
 </mapper>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iotek.dao.T_TrainMapper">
+    <insert id="saveTrain" parameterType="com.iotek.model.T_Train">
+        <selectKey resultType="integer" order="BEFORE" keyProperty="tra_id">
+            SELECT SEQ_TRA.nextval AS tra_id from DUAL
+        </selectKey>
+        INSERT INTO T_TRAIN(TRA_ID, TRA_THEME, TRA_CONTENT, TRA_OBJ, TRA_BEGINTIME, TRA_ENDTIME, TRA_ADDRESS, TRA_STATE)
+        VALUES (#{tra_id,jdbcType=INTEGER},#{tra_theme,jdbcType=VARCHAR},
+        #{tra_content,jdbcType=VARCHAR},#{tra_obj,jdbcType=INTEGER},#{tra_begintime,jdbcType=VARCHAR},
+        #{tra_endtime,jdbcType=VARCHAR},#{tra_address,jdbcType=VARCHAR},#{tra_state,jdbcType=INTEGER})
+    </insert>
+</mapper>

@@ -72,6 +72,19 @@
                 }
             })
         })
+        $(function () {
+            $("#n2").blur(function () {
+                var p = $("#n2").val();
+                var reg = /\S/;
+                if (reg.test(p)) {
+                    $("#n10").removeAttr("disabled")
+                    $("#n2").css('border','2px solid green');
+                } else {
+                    $("#n10").attr("disabled", "a")
+                    $("#n1").css('border','1px solid red');
+                }
+            })
+        })
     </script>
 </head>
 <body>
@@ -96,6 +109,7 @@
                     </c:forEach>
                 </select>
                 职位名称：<input id="n1" type="text" name="p_name">
+                基本薪资：<input id="n2" type="text" name="p_pay">
 
                 <input id="n10" type="submit" value="提交">
             </form>

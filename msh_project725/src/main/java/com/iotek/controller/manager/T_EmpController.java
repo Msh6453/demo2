@@ -72,8 +72,9 @@ public class T_EmpController {
         T_Resume tResume1=ts.getRe(tResume);
 
         List<T_Dept> tDepts=tds.getTdeptAll();
-        request.setAttribute("tRsume1",tResume1);
         request.setAttribute("tDepts",tDepts);
+        request.setAttribute("tRsume1",tResume1);
+
         return "manager/m_saveEmp2";
     }
 
@@ -141,21 +142,26 @@ public class T_EmpController {
         boolean falg=tes.updateT_EmpState(tEmp);
         return  getT_Emp( currentPage, request);
     }
-    //基本信息的修改
+    //基本信息不能修改！！！！，只能是换岗
     @RequestMapping("/updateemp1")
     public String updateemp1(int e_id,HttpServletRequest request){
         T_Emp t=new T_Emp();
         t.setE_id(e_id);
         T_Emp tEmp=tes.getT_Emp(t);
+
+        List<T_Dept> tDepts=tds.getTdeptAll();
+        request.setAttribute("tDepts",tDepts);
         request.setAttribute("tEmp",tEmp);
+        request.setAttribute("tps",tps);
+        request.setAttribute("tds",tds);
+
         return "manager/m_updateEmp";
     }
-    //修改代码
+    //将员工中的d_id，p_id 修改
     @RequestMapping("/updateemp2")
     public String updateemp2(T_Emp t_emp,HttpServletRequest request)throws Exception{
         boolean falg=tes.updateT_Emp(t_emp);
         int currentPage=1;
         return  getT_Emp( currentPage, request);
     }
-
 }

@@ -83,6 +83,7 @@
                     <th>ID</th>
                     <th>部门名称</th>
                     <th>职位名称</th>
+                    <th>基本薪资</th>
                     <th>修改</th>
                     <th>删除</th>
                 </tr>
@@ -101,6 +102,7 @@
                         <td><%=t.get(i).getP_id()%></td>
                         <td><%=t2.getD_name()%></td>
                         <td><%=t.get(i).getP_name()%></td>
+                        <td><%=t.get(i).getP_pay()%></td>
                         <td>
                             <a href="updatePos1?p_id=<%=t.get(i).getP_id()%>"><button >修改</button></a>
                         </td>
@@ -112,9 +114,8 @@
                         }
                     }
                 %>
-
                 <tr>
-                    <td colspan="5">
+                    <td colspan="6">
                         <c:forEach begin="1" end="${requestScope.totalPages}" var="pagesize">
                             <a href="getdept?currentPage=${pagesize}">${pagesize}</a>
                         </c:forEach>

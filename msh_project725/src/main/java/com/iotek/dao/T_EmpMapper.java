@@ -32,4 +32,7 @@ public interface T_EmpMapper {
     //员工登录
     T_Emp getEmpByNumAndPassword(T_Emp t_emp);
 
+    //查找试用期的员工
+    List<T_Emp> getEmpByState0(T_Emp t_emp);
+
 }

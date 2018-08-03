@@ -61,4 +61,9 @@ public class T_EmpServiceImpl implements T_EmpService {
     public T_Emp getEmpByNumAndPassword(T_Emp t_emp) {
         return tem.getEmpByNumAndPassword(t_emp);
     }
+
+    @Override
+    public List<T_Emp> getEmpByState0(T_Emp t_emp) {
+        return tem.getEmpByState0(t_emp);
+    }
 }

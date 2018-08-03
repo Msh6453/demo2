@@ -1,4 +1,9 @@
-<%@ page import="com.iotek.model.T_Emp" %><%--
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.iotek.model.T_Emp" %>
+<%@ page import="com.iotek.service.T_DeptService" %>
+<%@ page import="com.iotek.service.T_PositionService" %>
+<%@ page import="com.iotek.model.T_Dept" %>
+<%@ page import="com.iotek.model.T_Position" %><%--
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2018/8/2
@@ -61,81 +66,43 @@
     </style>
     <script src="jq-resources/jquery.js"></script>
     <script>
-        $(function () {
-            $("#n1").blur(function () {
-                var p = $("#n1").val();
-                var reg = /^[1-9]\d*$/;
-                if (reg.test(p)) {
-                    $("#n10").removeAttr("disabled")
-                    $("#n1").css('border','2px solid green');
-                } else {
-                    $("#n10").attr("disabled", "a")
-                    $("#n1").css('border','1px solid red');
-                }
-            })
-        })
+        $(function(){
+            $("#dept").click(function(){
+                var a=$("#dept").val();
+                $.ajax({
+                    url:"getPosition",
+                    data:"d_id="+a,
+                    type:"post",
+                    success:function (obj) {
+                        $("#pos option").remove();
+                        $.each(obj,function (i,item) {
+                            var b=item.p_id;
+                            $("#pos").append(
+                                "<option  value="+b+">"+item.p_name+"</option>"
 
-        $(function () {
-            $("#n2").blur(function () {
-                var p = $("#n2").val();
-                var reg = /\S/;
-                if (reg.test(p)) {
-                    $("#n2").css('border','2px solid green');
-                    $("#n10").removeAttr("disabled")
-                } else {
-                    $("#n2").css('border','1px solid red');
-                    $("#n10").attr("disabled", "a")
-                }
+                            )
+                        })
+                    }
+                })
             })
         })
-
-        $(function () {
-            $("#n4").blur(function () {
-                var p = $("#n4").val();
-                var reg = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$ /;
-                if (reg.test(p)) {
-                    $("#n4").css('border','2px solid green');
-                    $("#n10").removeAttr("disabled")
-                } else {
-                    $("#n4").css('border','1px solid red');
-                    $("#n10").attr("disabled", "a")
-                }
-            })
-        })
-
-        $(function () {
-            $("#n3").blur(function () {
-                var p = $("#n3").val();
-                var reg = /\S/;
-                if (reg.test(p)) {
-                    $("#n3").css('border','2px solid green');
-                    $("#n10").removeAttr("disabled")
-                } else {
-                    $("#n3").css('border','1px solid red');
-                    $("#n10").attr("disabled", "a")
-                }
-            })
-        })
-        $(function () {
-            $("#n5").blur(function () {
-                var p = $("#n5").val();
-                var reg = /\S/;
-                if (reg.test(p)) {
-                    $("#n5").css('border','2px solid green');
-                    $("#n10").removeAttr("disabled")
-                } else {
-                    $("#n5").css('border','1px solid red');
-                    $("#n10").attr("disabled", "a")
-                }
-            })
-        })
-
 
     </script>
 </head>
 <body>
 <%
     T_Emp t= (T_Emp) request.getAttribute("tEmp");
+    T_DeptService tds= (T_DeptService) request.getAttribute("tds");
+    T_PositionService tps= (T_PositionService) request.getAttribute("tps");
+    T_Dept t1=new T_Dept();
+    t1.setD_id(t.getD_id());
+    T_Dept t2=tds.getT_DeptByid(t1);
+
+    T_Position tP=new T_Position();
+    tP.setP_id(t.getP_id());
+    T_Position tpp=tps.get_PostionByid(tP);
+
+
 %>
 
 <div  id="da">
@@ -151,34 +118,29 @@
         <div id="d3">
             <form  method="post" action="updateemp2">
                 <table border=":solid 1px "  style="margin:auto;">
-                    <tr>
-                        <td><label>姓名</label></td>
-                        <td><input type="text" id="n2" name="e_name"
-                                   value="<%=t.getE_name()%>"></td>
-                    </tr>
-                    <tr>
-                        <td><label>年龄</label> </td>
-                        <td><input type="text" id="n1" name="e_age"  value="<%=t.getE_age()%>">
-                        </td>
-                    </tr>
 
                     <tr>
-                        <td><label>性别</label></td>
-                        <td><input id="n3" type="text" name="e_sex"
-                                   value="<%=t.getE_sex()%>"></td>
+                        <td><label>原部门名称</label></td>
+                        <td><input type="text" id="n2" disabled="disabled"
+                                   value="<%=t2.getD_name()%>"></td>
                     </tr>
-
                     <tr>
-                        <td><label>电话</label></td>
-                        <td><input type="text" id="n4" name="e_tel"
-                                   value="<%=t.getE_tel()%>"></td>
+                        <td><label>原职位名称</label></td>
+                        <td><input type="text" id="n1" disabled="disabled"
+                                   value="<%=tpp.getP_name()%>"></td>
                     </tr>
-
                     <tr>
-                        <td><label>家庭住址</label></td>
+                        <td><label>部门/职位</label></td>
                         <td>
-                            <input type="text" id="n5" name="e_address"
-                                   value="<%=t.getE_address()%>">
+                            <select id="dept" name="d_id">
+                                <option>请选择部门</option>
+                                <c:forEach items="${requestScope.tDepts}" var="d">
+                                    <option   value="${d.d_id}" id="dept1">${d.d_name}</option>
+                                </c:forEach>
+                            </select>
+
+                            <select id="pos" name="p_id">
+                            </select>
                         </td>
                     </tr>
 
