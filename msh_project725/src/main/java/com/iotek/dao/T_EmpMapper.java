@@ -11,9 +11,9 @@ import java.util.Map;
 public interface T_EmpMapper {
     //增加员工
     boolean saveTemp(T_Emp t_emp);
-    //根据部门id查找员工
+    //根据部门id查找在职state！=3员工
     List<T_Emp> getT_EmpByd_id(T_Emp t_emp);
-    //根据职位id查找员工
+    //根据职位id查找在职state！=3员工
     List<T_Emp> getT_EmpByp_id(T_Emp t_emp);
 
     //查看所有员工
@@ -28,11 +28,11 @@ public interface T_EmpMapper {
     //修改state的状态
     boolean updateT_EmpState(T_Emp t_emp);
 
-    //员工状态
-    //员工登录
-    T_Emp getEmpByNumAndPassword(T_Emp t_emp);
-
-    //查找试用期的员工
+    //查找试用期的员工（培训用到）
     List<T_Emp> getEmpByState0(T_Emp t_emp);
+
+    //员工状态
+    //员工登录（开始员工部分）
+    T_Emp getEmpByNumAndPassword(T_Emp t_emp);
 
 }

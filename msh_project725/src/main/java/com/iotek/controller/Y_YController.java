@@ -24,4 +24,8 @@ public class Y_YController {
         session.setAttribute("r_id",r_id);
         return"saveFeedback11";
     }
+   /* @RequestMapping("/emplogin")
+    public String emplogin(){
+        return "emp/"
+    }*/
 }

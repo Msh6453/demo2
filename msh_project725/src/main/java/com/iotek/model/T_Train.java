@@ -14,11 +14,12 @@ public class T_Train implements Serializable{
     private String tra_endtime;
     private String tra_address;
     private int tra_state;
+    private String tra_releasetime;
 
     public T_Train() {
     }
 
-    public T_Train(String tra_theme, String tra_content, int tra_obj, String tra_begintime, String tra_endtime, String tra_address, int tra_state) {
+    public T_Train(String tra_theme, String tra_content, int tra_obj, String tra_begintime, String tra_endtime, String tra_address, int tra_state, String tra_releasetime) {
         this.tra_theme = tra_theme;
         this.tra_content = tra_content;
         this.tra_obj = tra_obj;
@@ -26,6 +27,7 @@ public class T_Train implements Serializable{
         this.tra_endtime = tra_endtime;
         this.tra_address = tra_address;
         this.tra_state = tra_state;
+        this.tra_releasetime = tra_releasetime;
     }
 
     public int getTra_state() {
@@ -92,6 +94,14 @@ public class T_Train implements Serializable{
         this.tra_address = tra_address;
     }
 
+    public String getTra_releasetime() {
+        return tra_releasetime;
+    }
+
+    public void setTra_releasetime(String tra_releasetime) {
+        this.tra_releasetime = tra_releasetime;
+    }
+
     @Override
     public String toString() {
         return "T_Train{" +
@@ -103,6 +113,7 @@ public class T_Train implements Serializable{
                 ", tra_endtime='" + tra_endtime + '\'' +
                 ", tra_address='" + tra_address + '\'' +
                 ", tra_state=" + tra_state +
+                ", tra_releasetime='" + tra_releasetime + '\'' +
                 '}';
     }
 }

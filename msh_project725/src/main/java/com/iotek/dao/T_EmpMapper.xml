@@ -12,10 +12,10 @@
         UPDATE T_EMP SET E_STATE=#{e_state} WHERE E_ID=#{e_id}
     </update>
     <select id="getT_EmpByd_id" resultType="com.iotek.model.T_Emp">
-        SELECT * FROM  T_EMP WHERE D_ID=#{d_id}
+        SELECT * FROM  T_EMP WHERE D_ID=#{d_id} and E_STATE !=#{e_state}
     </select>
     <select id="getT_EmpByp_id" resultType="com.iotek.model.T_Emp">
-        SELECT * FROM  T_EMP WHERE P_ID=#{p_id}
+        SELECT * FROM  T_EMP WHERE P_ID=#{p_id} AND E_STATE !=#{e_state}
     </select>
     <select id="getT_Emps" resultType="com.iotek.model.T_Emp">
         SELECT  *  FROM T_EMP

@@ -89,9 +89,10 @@ public class T_PositionController {
         f.setP_id(p_id);
         T_Emp tEmp=new T_Emp();
         tEmp.setP_id(p_id);
+        tEmp.setE_state(3);
         List<T_Emp> t_emps=tes.getT_EmpByp_id(tEmp);
         if (t_emps.size()!=0){
-            request.setAttribute("pos","该职位还有人任职，不能删除");
+            request.setAttribute("pos","该职位还有在职的员工，不能删除");
             int currentPage=1;
             return getpos( currentPage,request);
         }else{

@@ -1,14 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.iotek.service.T_DeptService" %>
-<%@ page import="com.iotek.model.T_Position" %>
-<%@ page import="com.iotek.service.T_PositionService" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.iotek.model.T_Emp" %>
+<%@ page import="com.iotek.model.T_Train" %>
 <%@ page import="com.iotek.model.T_Dept" %><%--
   Created by IntelliJ IDEA.
   User: Administrator
-  Date: 2018/8/2
-  Time: 0:23
+  Date: 2018/8/3
+  Time: 10:48
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -61,19 +59,21 @@
             text-decoration: none;
             color: black;
         }
+        td{
+            text-align: center;
+        }
     </style>
 </head>
 <body>
 <%
-    List<T_Emp> t= (List<T_Emp>) request.getAttribute("temp");
+    List<T_Train> t = (List<T_Train>) request.getAttribute("trains");
     T_DeptService tds= (T_DeptService) request.getAttribute("tds");
-    T_PositionService tps= (T_PositionService) request.getAttribute("tps");
 %>
 
 <div  id="da">
     <div id="d1">
-        <h2>查看员工</h2>
-        <div id="d4">&nbsp;&nbsp; <span><a id="a1" href="m_emp">员工管理</a></span>
+        <h2>所有培训</h2>
+        <div id="d4">&nbsp;&nbsp; <span><a id="a1" href="m_train">培训中心</a></span>
             &nbsp;&nbsp;<span><a id="a2" href="exit1">退出</a></span>
         </div>
     </div>
@@ -84,20 +84,14 @@
             <table border=":solid 1px "  style="margin:auto;">
                 <tr>
                     <th>ID</th>
-                    <th>部门</th>
-                    <th>职位</th>
-                    <th>账号</th>
-                    <th>密码</th>
-                    <th>姓名</th>
-                    <th>年龄</th>
-                    <th>性别</th>
-                    <th>入职时间</th>
-                    <th>电话</th>
-                    <th>住址</th>
-                    <th>状态</th>
-                    <th>修改</th>
-                    <th>删除</th>
+                    <th>培训主题</th>
+                    <th>培训内容</th>
+                    <th>培训对象</th>
+                    <th>培训开始时间</th>
+                    <th>培训结束时间</th>
+                    <th>是否发布</th>
                 </tr>
+
                 <%
                     if (t==null){
                     }else{
@@ -105,42 +99,32 @@
                 %>
                 <%
                     T_Dept t1=new T_Dept();
-                    t1.setD_id(t.get(i).getD_id());
+                    t1.setD_id(t.get(i).getTra_obj());
                     T_Dept t2=tds.getT_DeptByid(t1);
-
-                    T_Position tP=new T_Position();
-                    tP.setP_id(t.get(i).getP_id());
-                    T_Position tpp=tps.get_PostionByid(tP);
                 %>
 
                 <tr>
-                    <td><%=t.get(i).getE_id()%></td>
-                    <td><%=t2.getD_name()%></td>
-                    <td><%=tpp.getP_name()%></td>
-                    <td><%=t.get(i).getE_num()%></td>
-                    <td><%=t.get(i).getE_password()%></td>
-                    <td><%=t.get(i).getE_name()%></td>
-                    <td><%=t.get(i).getE_age()%></td>
-                    <td><%=t.get(i).getE_sex()%></td>
-                    <td><%=t.get(i).getE_btime()%></td>
-                    <td><%=t.get(i).getE_tel()%></td>
-                    <td><%=t.get(i).getE_address()%></td>
+                    <td><%=t.get(i).getTra_id()%></td>
+                    <td><%=t.get(i).getTra_theme()%></td>
+                    <td><%=t.get(i).getTra_content()%></td>
                     <td><%
-                    if (t.get(i).getE_state()==0){
-                        out.print("试用期");
-                    }else if(t.get(i).getE_state()==1){
-                        out.print("正式工");
-                    }else{
-                        out.print("已离职");
-                    }
+                        if (t.get(i).getTra_obj()==0){
+                            out.print("试用期员工");
+                        }else{
+                            out.print(t2.getD_name());
+                        }
 
                     %></td>
-                    <td>
-                        <a href="updateemp1?e_id=<%=t.get(i).getE_id()%>"><button >换岗</button></a>
-                    </td>
-                    <td>
-                        <a href="deleteemp?e_state=<%=t.get(i).getE_state()%>&e_id=<%=t.get(i).getE_id()%>"><button >删除</button></a>
-                    </td>
+                    <td><%=t.get(i).getTra_begintime()%></td>
+                    <td><%=t.get(i).getTra_endtime()%></td>
+                    <td><%
+                    if (t.get(i).getTra_state()==0){
+                        out.print("未发布");
+                    }else{
+                        out.print("已发布");
+                    }
+
+                %></td>
                 </tr>
                 <%
                         }
@@ -148,14 +132,20 @@
                 %>
 
                 <tr>
-                    <td colspan="14">
+                    <td><a href="getTrainByState?state=0&currentPage=1"><button >未发布培训</button></a></td>
+                    <td colspan="5">
                         <c:forEach begin="1" end="${requestScope.totalPages}" var="pagesize">
                             <a href="getdept?currentPage=${pagesize}">${pagesize}</a>
                         </c:forEach>
                     </td>
+                    <td>
+                    <a href="getTrainByState?state=1&currentPage=1"><button >已发布培训</button></a>
+                    </td>
                 </tr>
-            </table>
 
+            </table>
+            ${requestScope.nostate1}
+            ${requestScope.nostate0}
         </div>
     </div>
 </div>

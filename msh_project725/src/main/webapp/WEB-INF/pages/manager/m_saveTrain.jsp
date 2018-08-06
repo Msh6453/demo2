@@ -203,6 +203,11 @@
                 </table>
                 <input id="n10"  type="submit" value="提交">
             </form>
+            ${requestScope.yes1}
+            ${requestScope. nopeople1}
+            ${requestScope.yes2}
+            ${requestScope. nopeople2}
+
         </div>
     </div>
 </div>

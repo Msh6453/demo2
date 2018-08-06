@@ -1,8 +1,8 @@
-<%--
+<%@ page import="com.iotek.model.T_Emp" %><%--
   Created by IntelliJ IDEA.
   User: Administrator
-  Date: 2018/7/26
-  Time: 13:51
+  Date: 2018/8/3
+  Time: 15:16
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -14,6 +14,7 @@
 <head>
     <base href="<%=basePath%>"/>
     <title></title>
+
     <style>
         #d1{
             width: 100%;
@@ -50,40 +51,52 @@
             text-decoration: none;
             color: white;
         }
-        #a3,#a4{
+        #a3,#a4,#a5,#a6,#a7{
             font-size: 20px;
             text-decoration: none;
             color: black;
         }
-        td{
-            text-align: center;
-        }
+
     </style>
 </head>
-<body>
+<body >
 <%
-    T_Manager tm= (T_Manager) request.getAttribute("t_manager1");
+    T_Emp te= (T_Emp) request.getAttribute("success");
 %>
 <div  id="da">
     <div id="d1">
-        <h2>管理员界面</h2>
+        <h2>员工界面</h2>
+
         <div id="d4"><span><%
-            if (tm!=null){
-                out.print("管理员"+tm.getM_name());
+            if (te!=null){
+                out.print("员工:"+te.getE_name());
             }
         %>
-        </span>&nbsp;&nbsp; <span><a id="a1" href="getresume?currentPage=1">个人中心</a></span>
-            &nbsp;&nbsp;<span><a id="a2" href="exit1">退出</a></span>
+        </span>&nbsp;&nbsp; <span><a id="a1" href="#">个人中心</a></span>
+            &nbsp;&nbsp;<span><a id="a2" href="exit1">退出</a></span><br/><br/>
+
+            &nbsp;&nbsp;<span><a id="a11" href="saveAttence1"><button>上班打卡</button></a></span>
+            &nbsp;&nbsp;<span><a id="a22" href="updateAttenceEndtime"><button>下班打卡</button></a></span><br/>
         </div>
     </div>
     <div id="d2">
         <img src="img/01.jpg">
 
         <div id="d3">
-            <a id="a3" href="" >应聘中心</a> &nbsp;&nbsp; &nbsp;&nbsp;
-            <a id="a4" href="m_recruit" >招聘中心</a>
+            <a id="a3" href="##" >个人考勤</a> &nbsp;&nbsp; &nbsp;&nbsp;
+            <a id="a4" href="##" >个人奖惩</a> &nbsp;&nbsp; &nbsp;&nbsp;
+            <a id="a5" href="##" >个人薪资</a>&nbsp;&nbsp; &nbsp;&nbsp;
+            <a id="a6" href="##" >##</a>&nbsp;&nbsp; &nbsp;&nbsp;
+            <a id="a7" href="##" >培训</a>&nbsp;&nbsp; &nbsp;&nbsp;
+            <br/>
+            ${requestScope.state0}
+            ${requestScope.state1}
+            ${requestScope.state2}
+            ${requestScope.tatt}
+            ${requestScope .nobegintime}
         </div>
     </div>
 </div>
 </body>
 </html>
+

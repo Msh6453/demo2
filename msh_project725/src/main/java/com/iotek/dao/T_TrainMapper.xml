@@ -5,9 +5,31 @@
         <selectKey resultType="integer" order="BEFORE" keyProperty="tra_id">
             SELECT SEQ_TRA.nextval AS tra_id from DUAL
         </selectKey>
-        INSERT INTO T_TRAIN(TRA_ID, TRA_THEME, TRA_CONTENT, TRA_OBJ, TRA_BEGINTIME, TRA_ENDTIME, TRA_ADDRESS, TRA_STATE)
+        INSERT INTO T_TRAIN(TRA_ID, TRA_THEME, TRA_CONTENT, TRA_OBJ, TRA_BEGINTIME, TRA_ENDTIME, TRA_ADDRESS, TRA_STATE,TRA_RELEASETIME)
         VALUES (#{tra_id,jdbcType=INTEGER},#{tra_theme,jdbcType=VARCHAR},
         #{tra_content,jdbcType=VARCHAR},#{tra_obj,jdbcType=INTEGER},#{tra_begintime,jdbcType=VARCHAR},
-        #{tra_endtime,jdbcType=VARCHAR},#{tra_address,jdbcType=VARCHAR},#{tra_state,jdbcType=INTEGER})
+        #{tra_endtime,jdbcType=VARCHAR},#{tra_address,jdbcType=VARCHAR},#{tra_state,jdbcType=INTEGER},#{tra_releasetime,jdbcType=VARCHAR})
     </insert>
+    <update id="updateTrainsState">
+        UPDATE T_TRAIN SET TRA_STATE=#{tra_state},TRA_RELEASETIME=#{tra_releasetime} where TRA_ID=#{tra_id}
+    </update>
+    <select id="getT_Trains" resultType="com.iotek.model.T_Train">
+        SELECT * FROM T_TRAIN
+    </select>
+    <select id="getT_TrainsCurrentPage" resultType="com.iotek.model.T_Train">
+         SELECT * FROM (
+    SELECT  rownum rn,u.* FROM T_TRAIN u )gd
+    WHERE gd.rn BETWEEN #{currentPage} and #{pageSize}
+    </select>
+    <select id="getT_TrainsByState" resultType="com.iotek.model.T_Train">
+        SELECT * FROM T_TRAIN WHERE TRA_STATE=#{tra_state}
+    </select>
+    <select id="getT_TrainsByStateCurrentPage" resultType="com.iotek.model.T_Train">
+         SELECT * FROM (
+    SELECT  rownum rn,u.* FROM T_TRAIN u where TRA_STATE=#{state})gd
+    WHERE gd.rn BETWEEN #{currentPage} and #{pageSize}
+    </select>
+    <select id="getT_Train" resultType="com.iotek.model.T_Train">
+        SELECT * FROM  T_TRAIN WHERE TRA_ID=#{tra_id}
+    </select>
 </mapper>

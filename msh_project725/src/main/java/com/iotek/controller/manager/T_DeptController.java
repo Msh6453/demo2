@@ -70,9 +70,10 @@ public class T_DeptController {
         int currentPage=1;
         T_Emp tEmp=new T_Emp();
         tEmp.setD_id(d_id);
+        tEmp.setE_state(3);
         List<T_Emp> t_emps=tes.getT_EmpByd_id(tEmp);
         if (t_emps.size()!=0){
-            request.setAttribute("nodelete","该部门有员工，无法删除");
+            request.setAttribute("nodelete","该部门有在职的员工，无法删除");
             return getTdeptsAll( currentPage, request);
         }else{
             T_Dept tDept=new T_Dept();

@@ -71,8 +71,9 @@
 
         <div id="d3">
             <a id="a3" href="getT_Train?currentPage=1" >查看培训</a> &nbsp;&nbsp; &nbsp;&nbsp;
-            <a id="a4" href="saveTrain?" >添加培训</a>&nbsp;&nbsp; &nbsp;&nbsp;
+            <a id="a4" href="saveTrain?" >添加培训</a>&nbsp;&nbsp; &nbsp;&nbsp;<br/>
             ${requestScope.noemp}
+            ${requestScope.notrains}
         </div>
     </div>
 </div>
