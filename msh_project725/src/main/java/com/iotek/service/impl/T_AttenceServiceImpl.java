@@ -6,6 +6,8 @@ import com.iotek.service.T_AttenceService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2018/8/4.
@@ -38,5 +40,30 @@ public class T_AttenceServiceImpl implements T_AttenceService {
     @Override
     public boolean updateAttenceStatex(T_Attence t_attence) {
         return tam.updateAttenceStatex(t_attence);
+    }
+
+    @Override
+    public List<T_Attence> getT_AttenceByStatex(T_Attence t_attence) {
+        return tam.getT_AttenceByStatex(t_attence);
+    }
+
+    @Override
+    public List<T_Attence> getAllAttenceByEid(T_Attence t_attence) {
+        return tam.getAllAttenceByEid(t_attence);
+    }
+
+    @Override
+    public List<T_Attence> getAllAttenceByEidCuu(Map<String, Object> data) {
+        return tam.getAllAttenceByEidCuu(data);
+    }
+
+    @Override
+    public List<T_Attence> getAllAttence() {
+        return tam.getAllAttence();
+    }
+
+    @Override
+    public List<T_Attence> get_AllAttenceCuu(Map<String, Object> data) {
+        return tam.get_AllAttenceCuu(data);
     }
 }

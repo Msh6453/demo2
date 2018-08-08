@@ -51,7 +51,7 @@
             text-decoration: none;
             color: white;
         }
-        #a3,#a4,#a5,#a6,#a7{
+        #a3,#a4,#a5,#a6,#a7,#a8{
             font-size: 20px;
             text-decoration: none;
             color: black;
@@ -61,7 +61,7 @@
 </head>
 <body >
 <%
-    T_Emp te= (T_Emp) request.getAttribute("success");
+    T_Emp te= (T_Emp) session.getAttribute("success");
 %>
 <div  id="da">
     <div id="d1">
@@ -83,17 +83,24 @@
         <img src="img/01.jpg">
 
         <div id="d3">
-            <a id="a3" href="##" >个人考勤</a> &nbsp;&nbsp; &nbsp;&nbsp;
-            <a id="a4" href="##" >个人奖惩</a> &nbsp;&nbsp; &nbsp;&nbsp;
-            <a id="a5" href="##" >个人薪资</a>&nbsp;&nbsp; &nbsp;&nbsp;
-            <a id="a6" href="##" >##</a>&nbsp;&nbsp; &nbsp;&nbsp;
-            <a id="a7" href="##" >培训</a>&nbsp;&nbsp; &nbsp;&nbsp;
+            <a id="a6" href="e_info?eid=<%=te.getE_id()%>" >个人信息</a>&nbsp;&nbsp; &nbsp;&nbsp;
+            <a id="a7" href="e_attence?currentPage=1" >个人考勤</a> &nbsp;&nbsp; &nbsp;&nbsp;
+            <a id="a3" href="e_rwdpen?currentPage=1" >个人奖惩</a> &nbsp;&nbsp; &nbsp;&nbsp;
+            <a id="a4" href="e_salary" >个人薪资</a>&nbsp;&nbsp; &nbsp;&nbsp;
+            <a id="a5" href="e_train?currentPage=1" >培训信息</a>&nbsp;&nbsp; &nbsp;&nbsp;
+            <a id="a8" href="e_appeal?currentPage=1" >查看复议结果</a>&nbsp;&nbsp; &nbsp;&nbsp;
             <br/>
             ${requestScope.state0}
             ${requestScope.state1}
             ${requestScope.state2}
             ${requestScope.tatt}
             ${requestScope .nobegintime}
+            ${requestScope.success1}
+            ${requestScope.x1}
+            ${requestScope.y1}
+            ${requestScope.norwpen}
+            ${requestScope.notTrain}
+            ${requestScope.notAppeal}
         </div>
     </div>
 </div>

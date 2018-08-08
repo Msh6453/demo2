@@ -82,11 +82,26 @@ public class T_RecruitController {
     }
     //增加招聘信息
     @RequestMapping("/save2_recruit")
-    public String save2_recruit( T_Recruit t_recruit,HttpServletRequest request)throws Exception{
-        System.out.println(t_recruit);
-       t_recruit.setR_state(1);
-       t_recruit.setR_begintime("0");
-        boolean falg=trs.saveRecruits(t_recruit);
+    public String save2_recruit( T_Recruit t,HttpServletRequest request)throws Exception{
+            if (t.getR_job()==""||t.getR_pay()==0||t.getR_address()==""||
+                    t.getR_tel()==""||t.getR_email()==""||t.getR_experience()==""||
+                    t.getR_required()==""||t.getR_describer()==""){
+                request.setAttribute("re","不能有空！！");
+                return savem_recruit(request);
+            }
+        /*  if (t!=null){
+
+          }else{
+              request.setAttribute("re","不能有空！！");
+              return savem_recruit(request);
+          }*/
+
+
+        System.out.println("xxxxxxxxxxxxxxx");
+        System.out.println(t);
+           t.setR_state(1);
+           t.setR_begintime("0");
+        boolean falg=trs.saveRecruits(t);
         request.setAttribute("save2","添加招聘信息成功");
         return "manager/m_recruit";
     }
@@ -144,6 +159,7 @@ public class T_RecruitController {
     }
     @RequestMapping("/updaterecruit2")
     public String updaterecruit2(T_Recruit t_recruit,HttpServletRequest request)throws Exception{
+        System.out.println(t_recruit);
         boolean falg=trs.updateRecruits(t_recruit);
         int currentPage=1;
         return getm_recruit(currentPage, request);

@@ -72,7 +72,7 @@
         <div id="d3">
             <a id="a3" href="getT_Emp?currentPage=1" >查看员工</a> &nbsp;&nbsp; &nbsp;&nbsp;
             <a id="a4" href="saveemp1?currentPage=1" >添加员工</a>&nbsp;&nbsp; &nbsp;&nbsp;
-            ${requestScope.noemp}
+           <br/> ${requestScope.noemp}
         </div>
     </div>
 </div>

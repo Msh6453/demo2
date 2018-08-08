@@ -1,4 +1,6 @@
-<%--
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.iotek.model.T_Resume" %><%--
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2018/7/29
@@ -70,6 +72,10 @@
     </script>
 </head>
 <body>
+<%
+        List<T_Resume> tr= (List<T_Resume>) request.getAttribute("tResumes");
+
+%>
 
 <div  id="da">
     <div id="d1">
@@ -87,6 +93,66 @@
                 简历id：<input id="n1" name="re_id" >
                 <input id="n10" type="submit" value="提交">
             </form>
+            <table border=":solid 1px "  style="margin:auto;">
+                <tr>
+                    <th>ID</th>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                    <th>性别 </th>
+                    <th>出生年月</th>
+                    <th>专业</th>
+                    <th>学历</th>
+                    <th>毕业时间</th>
+                    <th>爱好</th>
+                    <th>电话</th>
+                    <th>家庭住址</th>
+                    <th>工作经验</th>
+                    <th>专业技能</th>
+
+                </tr>
+
+                <%
+                    if (tr==null){
+
+                    }else{
+                        for (int i = 0; i < tr.size(); i++) {
+
+                %>
+                <tr>
+                    <td><%=tr.get(i).getRe_id()%></td>
+                    <td><%=tr.get(i).getRe_name()%></td>
+                    <td><%=tr.get(i).getRe_age()%></td>
+                    <td><%=tr.get(i).getRe_sex()%></td>
+                    <td><%=tr.get(i).getRe_birday()%></td>
+                    <td><%=tr.get(i).getRe_major()%></td>
+                    <td><%=tr.get(i).getRe_edu()%></td>
+                    <td><%=tr.get(i).getRe_endtime()%></td>
+                    <td><%=tr.get(i).getRe_hobby()%></td>
+                    <td><%=tr.get(i).getRe_tel()%></td>
+                    <td><%=tr.get(i).getRe_address()%></td>
+                    <td >
+                            <textarea id="tel4" name="re_experience"  cols="100" rows="10"
+                                      style="width:100px; height:50px"><%=tr.get(i).getRe_experience()%>
+                            </textarea>
+                    </td>
+                    <td  style="width: 30px">
+                            <textarea id="tel3" name="re_skill" cols="100" rows="10"
+                      </tr>
+                <%
+                        }
+                    }
+                %>
+
+                <tr>
+                    <td colspan="13">
+                        <c:forEach begin="1" end="${requestScope.totalPages}" var="pagesize">
+                            <a href="getresume1?currentPage=${pagesize}">${pagesize}</a>
+                        </c:forEach>
+                    </td>
+                </tr>
+
+            </table>
+
         </div>
     </div>
 

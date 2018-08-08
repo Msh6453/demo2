@@ -76,7 +76,7 @@
         $(function () {
             $("#n2").blur(function () {
                 var p = $("#n2").val();
-                var reg = /\S/;
+                var reg = /^[1-9]\d*$/;
                 if (reg.test(p)) {
                     $("#n2").css('border','2px solid green');
                     $("#n10").removeAttr("disabled")
@@ -104,7 +104,7 @@
         $(function () {
             $("#n4").blur(function () {
                 var p = $("#n4").val();
-                var reg = /\S/;
+                var reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
                 if (reg.test(p)) {
                     $("#n4").css('border','2px solid green');
                     $("#n10").removeAttr("disabled")
@@ -270,9 +270,9 @@
                     </tr>
 
                 </table>
-                <input id="n10"  type="submit" value="提交">
+                <input id="n10" disabled="disabled" type="submit" value="提交">
             </form>
-
+            ${requestScope.re}
         </div>
     </div>
 </div>

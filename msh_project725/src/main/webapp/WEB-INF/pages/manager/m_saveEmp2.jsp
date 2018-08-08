@@ -62,6 +62,103 @@
     </style>
     <script src="jq-resources/jquery.js"></script>
     <script>
+        $(function () {
+            $("#n1").blur(function () {
+                var p = $("#n1").val();
+                var reg = /^\d{3,20}$/;
+                if (reg.test(p)) {
+                    $("#n10").removeAttr("disabled")
+                    $("#n1").css('border','2px solid green');
+                } else {
+                    $("#n10").attr("disabled", "a")
+                    $("#n1").css('border','1px solid red');
+                }
+            })
+        })
+
+        $(function () {
+            $("#n2").blur(function () {
+                var p = $("#n2").val();
+                var reg = /^\d{3,20}$/;
+                if (reg.test(p)) {
+                    $("#n2").css('border','2px solid green');
+                    $("#n10").removeAttr("disabled")
+                } else {
+                    $("#n2").css('border','1px solid red');
+                    $("#n10").attr("disabled", "a")
+                }
+            })
+        })
+
+        $(function () {
+            $("#n3").blur(function () {
+                var p = $("#n3").val();
+                var reg = /^[1-9]\d*$/;
+                if (reg.test(p)) {
+                    $("#n3").css('border','2px solid green');
+                    $("#n10").removeAttr("disabled")
+                } else {
+                    $("#n3").css('border','1px solid red');
+                    $("#n10").attr("disabled", "a")
+                }
+            })
+        })
+
+        $(function () {
+            $("#n4").blur(function () {
+                var p = $("#n4").val();
+                var reg = /^[\u4e00-\u9fa5]{1,2}$/;
+                if (reg.test(p)) {
+                    $("#n4").css('border','2px solid green');
+                    $("#n10").removeAttr("disabled")
+                } else {
+                    $("#n4").css('border','1px solid red');
+                    $("#n10").attr("disabled", "a")
+                }
+            })
+        })
+
+        $(function () {
+            $("#5").blur(function () {
+                var p = $("#5").val();
+                var reg = /\S/;
+                if (reg.test(p)) {
+                    $("#5").css('border','2px solid green');
+                    $("#n10").removeAttr("disabled")
+                } else {
+                    $("#5").css('border','1px solid red');
+                    $("#n10").attr("disabled", "a")
+                }
+            })
+        })
+
+        $(function () {
+            $("#8").blur(function () {
+                var p = $("#8").val();
+                var reg = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
+                if (reg.test(p)) {
+                    $("#8").css('border','2px solid green');
+                    $("#n10").removeAttr("disabled")
+                } else {
+                    $("#8").css('border','1px solid red');
+                    $("#n10").attr("disabled", "a")
+                }
+            })
+        })
+        $(function () {
+            $("#9").blur(function () {
+                var p = $("#9").val();
+                var reg = /\S/;
+                if (reg.test(p)) {
+                    $("#9").css('border','2px solid green');
+                    $("#n10").removeAttr("disabled")
+                } else {
+                    $("#9").css('border','1px solid red');
+                    $("#n10").attr("disabled", "a")
+                }
+            })
+        })
+
         $(function(){
             $("#dept").click(function(){
                 var a=$("#dept").val();
@@ -92,8 +189,8 @@
 
 <div  id="da">
     <div id="d1">
-        <h2>管理员界面</h2>
-        <div id="d4">&nbsp;&nbsp; <span><a id="a1" href="mananger">管理员界面</a></span>
+        <h2>员工新增</h2>
+        <div id="d4">&nbsp;&nbsp; <span><a id="a1" href="m_emp">员工管理界面</a></span>
             &nbsp;&nbsp;<span><a id="a2" href="exit1">退出</a></span>
         </div>
     </div>

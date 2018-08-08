@@ -107,7 +107,7 @@
                     <td><%=tRecruits.get(i).getR_required()%></td>
                     <td><%=tRecruits.get(i).getR_describer()%></td>
                     <td><%=tRecruits.get(i).getR_begintime()%></td>
-                    <td><a href="saveFeedback1?r_id=<%=tRecruits.get(i).getR_id()%>"><input type="button" value="投递"></a></td>
+                    <td><a href="saveFeedback1?currentPage=1&r_id=<%=tRecruits.get(i).getR_id()%>"><input type="button" value="投递"></a></td>
                 </tr>
 
                 <%
@@ -123,6 +123,7 @@
             %>
             ${requestScope.Feedback1}
             ${requestScope.Feedback2}
+            ${requestScope.noResumes}
         </div>
     </div>
 </div>

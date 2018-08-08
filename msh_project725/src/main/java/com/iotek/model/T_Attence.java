@@ -8,6 +8,7 @@ import java.io.Serializable;
  */
 public class T_Attence implements Serializable {
     private int a_id;
+    private String a_moth;
     private String a_today;
     private String a_begintime;
     private String a_endtime;
@@ -18,7 +19,8 @@ public class T_Attence implements Serializable {
     public T_Attence() {
     }
 
-    public T_Attence(String a_today, String a_begintime, String a_endtime, int a_state, int e_id, int a_statex) {
+    public T_Attence(String a_moth, String a_today, String a_begintime, String a_endtime, int a_state, int e_id, int a_statex) {
+        this.a_moth = a_moth;
         this.a_today = a_today;
         this.a_begintime = a_begintime;
         this.a_endtime = a_endtime;
@@ -75,6 +77,14 @@ public class T_Attence implements Serializable {
         this.e_id = e_id;
     }
 
+    public String getA_moth() {
+        return a_moth;
+    }
+
+    public void setA_moth(String a_moth) {
+        this.a_moth = a_moth;
+    }
+
     public int getA_statex() {
         return a_statex;
     }
@@ -87,6 +97,7 @@ public class T_Attence implements Serializable {
     public String toString() {
         return "T_Attence{" +
                 "a_id=" + a_id +
+                ", a_moth='" + a_moth + '\'' +
                 ", a_today='" + a_today + '\'' +
                 ", a_begintime='" + a_begintime + '\'' +
                 ", a_endtime='" + a_endtime + '\'' +

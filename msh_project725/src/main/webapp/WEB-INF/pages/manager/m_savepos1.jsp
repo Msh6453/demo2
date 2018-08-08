@@ -75,7 +75,7 @@
         $(function () {
             $("#n2").blur(function () {
                 var p = $("#n2").val();
-                var reg = /\S/;
+                var reg = /^[1-9]\d*$/;
                 if (reg.test(p)) {
                     $("#n10").removeAttr("disabled")
                     $("#n2").css('border','2px solid green');

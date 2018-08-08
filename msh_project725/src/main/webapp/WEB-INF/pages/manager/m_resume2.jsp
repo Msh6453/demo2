@@ -68,7 +68,7 @@
 <div  id="da">
     <div id="d1">
         <h2>简历详情</h2>
-        <div id="d4">&nbsp;&nbsp; <span><a id="a1" href="m_feedback">应聘中心</a></span>
+        <div id="d4">&nbsp;&nbsp; <span><a id="a1" href="m_emp">员工管理界面</a></span>
             &nbsp;&nbsp;<span><a id="a3" href="saveemp1?currentPage=1">返回上一页</a></span>
             &nbsp;&nbsp;<span><a id="a2" href="exit1">退出</a></span>
         </div>

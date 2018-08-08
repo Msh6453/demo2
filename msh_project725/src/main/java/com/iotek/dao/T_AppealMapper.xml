@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iotek.dao.T_AppealMapper">
+    <insert id="saveAppeal">
+        INSERT INTO T_APPEAL (APP_ID, APP_MONTH, APP_REASON, APP_RESULT, APP_TIME, E_ID,APP_STATE)
+         VALUES(SEQ_APP.nextval,#{app_month},#{app_reason},#{app_result},#{app_time},#{e_id},#{app_state})
+    </insert>
+    <update id="updateAppeal">
+        UPDATE T_APPEAL SET APP_STATE=#{app_state},APP_RESULT=#{app_result} WHERE APP_ID=#{app_id}
+    </update>
+    <select id="getAppealByEidAndState1" resultType="com.iotek.model.T_Appeal">
+        SELECT * FROM T_APPEAL WHERE E_ID=#{e_id} AND APP_STATE=#{app_state}
+
+    </select>
+    <select id="getAppealByEidAndState1Curr" resultType="com.iotek.model.T_Appeal">
+                SELECT * FROM (
+    SELECT  rownum rn,u.* FROM T_ATTENCE u WHERE E_ID=#{e_id} AND APP_STATE=#{app_state} )gd
+    WHERE gd.rn BETWEEN #{currentPage} and #{pageSize}
+    </select>
+    <select id="getAppealByState0" resultType="com.iotek.model.T_Appeal">
+        SELECT * FROM T_APPEAL WHERE  APP_STATE=#{app_state}
+    </select>
+    <select id="getAppealByState0Curr" resultType="com.iotek.model.T_Appeal">
+         SELECT * FROM (
+    SELECT  rownum rn,u.* FROM T_ATTENCE u WHERE APP_STATE=#{app_state} )gd
+    WHERE gd.rn BETWEEN #{currentPage} and #{pageSize}
+    </select>
+    <select id="getAppeal" resultType="com.iotek.model.T_Appeal">
+        SELECT * FROM T_APPEAL WHERE APP_ID=#{app_id}
+    </select>
+</mapper>

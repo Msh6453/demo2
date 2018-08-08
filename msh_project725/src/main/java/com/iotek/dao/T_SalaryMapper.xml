@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iotek.dao.T_SalaryMapper">
+    <insert id="saveT_Salary">
+        INSERT INTO T_SALARY (SA_ID, E_ID, SA_MONTH, SA_SALARY, SA_STATE, SA_RPCOST, SA_SSCOST, SA_BONUS, SA_ALLSALARY)
+         VALUES (SEQ_SA.nextval,#{e_id},#{sa_month},#{sa_salary},#{sa_state},#{sa_rpcost},#{sa_sscost},#{sa_bonus},#{sa_allsalary})
+    </insert>
+    <select id="getT_SalaryByDay10" resultType="com.iotek.model.T_Salary">
+        SELECT * FROM T_SALARY WHERE SA_MONTH=#{sa_month}
+    </select>
+    <select id="getT_SalaryByEidAndMoth" resultType="com.iotek.model.T_Salary">
+        SELECT * FROM T_SALARY WHERE SA_MONTH=#{sa_month} AND E_ID=#{e_id}
+    </select>
+    <select id="getT_SalaryByEidAndMothCurr" resultType="com.iotek.model.T_Salary">
+         SELECT * FROM (
+    SELECT  rownum rn,u.* FROM T_SALARY u WHERE SA_MONTH=#{sa_month} AND E_ID=#{e_id})gd
+    WHERE gd.rn BETWEEN #{currentPage} and #{pageSize}
+    </select>
+</mapper>

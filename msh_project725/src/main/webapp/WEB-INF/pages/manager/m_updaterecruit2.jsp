@@ -222,7 +222,7 @@
                     <tr>
                         <td><label>公司福利</label></td>
                         <td>
-                            <textarea id="te3" name="r_required" cols="100" rows="10"
+                            <textarea id="te3" name="r_describer" cols="100" rows="10"
                                       style="width:200px; height:50px" >
                               <%=tR.getR_describer()%>
                             </textarea>

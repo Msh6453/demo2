@@ -10,18 +10,18 @@ public class T_Rwdpen implements Serializable{
     private double rp_money;
     private String rp_time;
     private String rp_reason;
-    private String rp_month;
+    private String rp_moth;
     private int e_id;
     private int rp_state;
 
     public T_Rwdpen() {
     }
 
-    public T_Rwdpen(double rp_money, String rp_time, String rp_reason, String rp_month, int e_id, int rp_state) {
+    public T_Rwdpen(double rp_money, String rp_time, String rp_reason, String rp_moth, int e_id, int rp_state) {
         this.rp_money = rp_money;
         this.rp_time = rp_time;
         this.rp_reason = rp_reason;
-        this.rp_month = rp_month;
+        this.rp_moth = rp_moth;
         this.e_id = e_id;
         this.rp_state = rp_state;
     }
@@ -58,12 +58,12 @@ public class T_Rwdpen implements Serializable{
         this.rp_reason = rp_reason;
     }
 
-    public String getRp_month() {
-        return rp_month;
+    public String getRp_moth() {
+        return rp_moth;
     }
 
-    public void setRp_month(String rp_month) {
-        this.rp_month = rp_month;
+    public void setRp_moth(String rp_moth) {
+        this.rp_moth = rp_moth;
     }
 
     public int getE_id() {
@@ -89,7 +89,7 @@ public class T_Rwdpen implements Serializable{
                 ", rp_money=" + rp_money +
                 ", rp_time='" + rp_time + '\'' +
                 ", rp_reason='" + rp_reason + '\'' +
-                ", rp_month='" + rp_month + '\'' +
+                ", rp_moth='" + rp_moth + '\'' +
                 ", e_id=" + e_id +
                 ", rp_state=" + rp_state +
                 '}';

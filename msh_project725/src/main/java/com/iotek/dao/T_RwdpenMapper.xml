@@ -3,9 +3,31 @@
 <mapper namespace="com.iotek.dao.T_RwdpenMapper">
     <insert id="saveRwdpen">
         INSERT INTO T_RWDPEN (RP_ID, RP_MONEY, RP_TIME, RP_REASON, RP_MOTH, E_ID)
-        VALUES (SEQ_RP.nextval,#{rp_money},#{rp_time},#{rp_reason},#{rp_month},#{e_id})
+        VALUES (SEQ_RP.nextval,#{rp_money},#{rp_time},#{rp_reason},#{rp_moth},#{e_id})
     </insert>
     <delete id="deleteRwdpen">
         DELETE  FROM  T_RWDPEN WHERE E_ID=#{e_id} AND RP_REASON=#{rp_reason} AND RP_TIME=#{rp_time}
     </delete>
+    <select id="getT_RwdpenState1" resultType="com.iotek.model.T_Rwdpen">
+        SELECT * FROM T_RWDPEN WHERE E_ID=#{e_id} AND RP_MOTH=#{rp_moth} AND RP_STATE=#{rp_state}
+
+    </select>
+    <select id="getT_RwdpenByEidAndMoth" resultType="com.iotek.model.T_Rwdpen">
+        SELECT * FROM  T_RWDPEN WHERE E_ID=#{e_id} AND RP_MOTH=#{rp_moth}
+    </select>
+    <select id="getT_RwdpenByEidAndMothCurr" resultType="com.iotek.model.T_Rwdpen">
+         SELECT * FROM (
+    SELECT  rownum rn,u.* FROM T_RWDPEN u where E_ID=#{eid} AND RP_MOTH=#{moth})gd
+    WHERE gd.rn BETWEEN #{currentPage} and #{pageSize}
+    </select>
+    <select id="getT_RwdpenByAll" resultType="com.iotek.model.T_Rwdpen">
+         SELECT * FROM  T_RWDPEN
+
+    </select>
+    <select id="getT_RwdpenByAllCurr" resultType="com.iotek.model.T_Rwdpen">
+         SELECT * FROM (
+    SELECT  rownum rn,u.* FROM T_RWDPEN u )gd
+    WHERE gd.rn BETWEEN #{currentPage} and #{pageSize}
+    </select>
+
 </mapper>

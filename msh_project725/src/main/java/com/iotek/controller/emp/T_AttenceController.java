@@ -10,6 +10,7 @@ import com.iotek.service.T_PositionService;
 import com.iotek.service.T_RwdpenService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import utils.DoPage;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,9 @@ import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2018/8/4.
@@ -100,6 +104,7 @@ public class T_AttenceController {
         if (nowtime<uptime){//正常上班
             //添加考勤记录，不产生奖惩
             T_Attence ta=new T_Attence();
+            ta.setA_moth(mtime);//月份
             ta.setA_today(time1);//日期
             ta.setA_begintime(time2);//打卡时间
             ta.setA_endtime("0");//没有下班时间
@@ -112,6 +117,7 @@ public class T_AttenceController {
         }else if (uptime<nowtime&&nowtime<up3time){
             //添加考勤记录，产生奖惩记录，迟到
             T_Attence ta=new T_Attence();
+            ta.setA_moth(mtime);//月份
             ta.setA_today(time1);//日期
             ta.setA_begintime(time2);//打卡时间
             ta.setA_endtime("0");//没有下班时间
@@ -133,7 +139,7 @@ public class T_AttenceController {
             double money=tp2.getP_pay();//得到基本薪资
             double money1=money/22*0.4;//当天工资的25%；
             tr.setRp_money(money1);//扣除的钱
-            tr.setRp_month(mtime);//奖惩产生的月份
+            tr.setRp_moth(mtime);//奖惩产生的月份
             tr.setRp_time(time1);//奖惩记录产生的日期
             tr.setRp_reason("上班迟到");//奖惩记录产生的原因
             boolean falg1=trs.saveRwdpen(tr);
@@ -142,6 +148,7 @@ public class T_AttenceController {
         }else{
             //添加考勤记录，产生奖惩记录，旷工
             T_Attence ta=new T_Attence();
+            ta.setA_moth(mtime);//月份
             ta.setA_today(time1);//日期
             ta.setA_begintime(time2);//打卡时间
             ta.setA_endtime("0");//没有下班时间
@@ -163,7 +170,7 @@ public class T_AttenceController {
             double money=tp2.getP_pay();//得到基本薪资
             double money1=money/22;//当天工资；
             tr.setRp_money(money1);//扣除的钱
-            tr.setRp_month(mtime);//奖惩产生的月份
+            tr.setRp_moth(mtime);//奖惩产生的月份
             tr.setRp_time(time1);//奖惩记录产生的日期
             tr.setRp_reason("旷工");//奖惩记录产生的原因
             tr.setRp_state(0);//state=0;说明是惩罚
@@ -255,7 +262,7 @@ public class T_AttenceController {
                         a1.setA_state(10);
                         //正常的上下班，改变状态state=10；
                         boolean falg=tas.updateAttenceState(a1);
-                        request.setAttribute("success","第一次下班卡打卡成功，忙了一天，辛苦了！");
+                        request.setAttribute("success1","第一次下班卡打卡成功，忙了一天，辛苦了！");
                         return "emp/e_empFrist";
                     }else if (a>=down1time){//属于加班，有奖惩的产生，改变状态state=5；
                         T_Attence a2=new T_Attence();
@@ -271,7 +278,7 @@ public class T_AttenceController {
                         long onehour=1000*60*60;
                         int x= (int) ((a-down1time)/onehour);
                         tr.setRp_money(money1+x*100);//
-                        tr.setRp_month(mtime);//奖惩产生的月份
+                        tr.setRp_moth(mtime);//奖惩产生的月份
                         tr.setRp_time(time1);//奖惩记录产生的日期
                         tr.setRp_reason("加班");//奖惩记录产生的原因
                         tr.setRp_state(1);//state=1;说明是奖励
@@ -290,12 +297,12 @@ public class T_AttenceController {
                         tr.setE_id(e_id);//获取员工id
                         double money2=money1*0.4;//当天工资的25%；
                         tr.setRp_money(money2);//扣除的钱
-                        tr.setRp_month(mtime);//奖惩产生的月份
+                        tr.setRp_moth(mtime);//奖惩产生的月份
                         tr.setRp_time(time1);//奖惩记录产生的日期
                         tr.setRp_reason("下班早退");//奖惩记录产生的原因
                         tr.setRp_state(0);//state=0;说明是处罚
                         boolean falg3=trs.saveRwdpen(tr);
-                        request.setAttribute("success2","第一次下班卡打卡成功，现在打卡是算早退的！");
+                        request.setAttribute("success1","第一次下班卡打卡成功，现在打卡是算早退的！");
                         return "emp/e_empFrist";
 
                     }else{//a<down_3time,说明是下班旷工，state=4，下班旷工
@@ -308,12 +315,12 @@ public class T_AttenceController {
                         tr.setE_id(e_id);//获取员工id
 
                         tr.setRp_money(money1);//扣除的钱 =当天工资；
-                        tr.setRp_month(mtime);//奖惩产生的月份
+                        tr.setRp_moth(mtime);//奖惩产生的月份
                         tr.setRp_time(time1);//奖惩记录产生的日期
                         tr.setRp_reason("下午旷工");//奖惩记录产生的原因
                         tr.setRp_state(0);//state=0;说明是处罚
                         boolean falg3=trs.saveRwdpen(tr);
-                        request.setAttribute("success3","第一次下班卡打卡成功，现在打卡是算旷工的！");
+                        request.setAttribute("success1","第一次下班卡打卡成功，现在打卡是算旷工的！");
                         return "emp/e_empFrist";
                     }
                 }else if(state==1){//state=1，说明的是就是迟到上班
@@ -324,7 +331,7 @@ public class T_AttenceController {
                     if (a>=downtime&&a<down1time){//这个时间段说明，正常的下班时间，state=9，迟到上班和正常下班；
                         a1.setA_state(9);
                         boolean falg=tas.updateAttenceState(a1);//将state的状态改为9；
-                        request.setAttribute("success4","第一次下班卡打卡成功，上班迟到，下班卡正常！");
+                        request.setAttribute("success1","第一次下班卡打卡成功，上班迟到，下班卡正常！");
                         return "emp/e_empFrist";
 
                     }else if (a>=down1time){//满足这个条件，说明是加班的状态，state=8，迟到上班和加班下班；
@@ -340,12 +347,12 @@ public class T_AttenceController {
                         long onehour=1000*60*60;
                         int x= (int) ((a-down1time)/onehour);
                         tr.setRp_money(money1+x*100);//
-                        tr.setRp_month(mtime);//奖惩产生的月份
+                        tr.setRp_moth(mtime);//奖惩产生的月份
                         tr.setRp_time(time1);//奖惩记录产生的日期
                         tr.setRp_reason("加班");//奖惩记录产生的原因
                         tr.setRp_state(1);//state=1;说明是奖励
                         boolean falg3=trs.saveRwdpen(tr);
-                        request.setAttribute("success5","第一次下班卡打卡成功，上班迟到，下班卡是加班！");
+                        request.setAttribute("success1","第一次下班卡打卡成功，上班迟到，下班卡是加班！");
                         return "emp/e_empFrist";
                     }else if (a>=down_3time&&a<downtime){//这个时间段属于早退的状态，上班迟到，下班早退，state=6；
                         a1.setA_state(6);
@@ -356,12 +363,12 @@ public class T_AttenceController {
                         tr.setE_id(e_id);//获取员工id
                         double money2=money1*0.4;//当天工资的25%；
                         tr.setRp_money(money2);//扣除的钱
-                        tr.setRp_month(mtime);//奖惩产生的月份
+                        tr.setRp_moth(mtime);//奖惩产生的月份
                         tr.setRp_time(time1);//奖惩记录产生的日期
                         tr.setRp_reason("下班早退");//奖惩记录产生的原因
                         tr.setRp_state(0);//state=0;说明是处罚
                         boolean falg3=trs.saveRwdpen(tr);
-                        request.setAttribute("success6","第一次下班卡打卡成功，上班迟到，下班卡是早退卡！");
+                        request.setAttribute("success1","第一次下班卡打卡成功，上班迟到，下班卡是早退卡！");
                         return "emp/e_empFrist";
                     }else{//a<down_3time,说明是下班旷工，state=7，下班旷工
                         a1.setA_state(7);
@@ -372,16 +379,16 @@ public class T_AttenceController {
                         tr.setE_id(e_id);//获取员工id
 
                         tr.setRp_money(money1);//扣除的钱 =当天工资；
-                        tr.setRp_month(mtime);//奖惩产生的月份
+                        tr.setRp_moth(mtime);//奖惩产生的月份
                         tr.setRp_time(time1);//奖惩记录产生的日期
                         tr.setRp_reason("下午旷工");//奖惩记录产生的原因
                         tr.setRp_state(0);//state=0;说明是处罚
                         boolean falg3=trs.saveRwdpen(tr);
-                        request.setAttribute("success7","第一次下班卡打卡成功，上班迟到，下班卡是旷工！");
+                        request.setAttribute("success1","第一次下班卡打卡成功，上班迟到，下班卡是旷工！");
                         return "emp/e_empFrist";
                     }
                 }else{//上午旷工的员工打下班卡
-                    request.setAttribute("success8","第一次下班卡打卡成功，上班旷工，打卡无效！");
+                    request.setAttribute("success1","第一次下班卡打卡成功，上班旷工，打卡无效！");
                     return "emp/e_empFrist";
                 }
             }else{//end_time是有的，不为0；
@@ -412,7 +419,7 @@ public class T_AttenceController {
                         tr.setRp_time(time1);//奖惩记录产生的日期
                         tr.setRp_reason("下班早退");//之前的原因是对应的
                         boolean falg2=trs.deleteRwdpen(tr);
-                        request.setAttribute("x2","下班卡打卡成功，上班正常，下班正常！");
+                        request.setAttribute("x1","下班卡打卡成功，上班正常，下班正常！");
                         return "emp/e_empFrist";
                     }else{//这个状态就是加班的情况，删除之前的早退惩罚，增加加班奖励，将state改为=5；
                         //将状态改变为state=5；
@@ -434,12 +441,12 @@ public class T_AttenceController {
                         long onehour=1000*60*60;
                         int x= (int) ((a-down1time)/onehour);
                         tr1.setRp_money(money1+x*100);//
-                        tr1.setRp_month(mtime);//奖惩产生的月份
+                        tr1.setRp_moth(mtime);//奖惩产生的月份
                         tr1.setRp_time(time1);//奖惩记录产生的日期
                         tr1.setRp_reason("加班");//奖惩记录产生的原因
                         tr1.setRp_state(1);//state=1;说明是奖励
                         boolean falg3=trs.saveRwdpen(tr1);
-                        request.setAttribute("x3","下班卡打卡成功，上班正常，下班加班！");
+                        request.setAttribute("x1","下班卡打卡成功，上班正常，下班加班！");
                         return "emp/e_empFrist";
                     }
                 }else if (state==4){//上班正常，下班是旷工，之后在打卡有4中状态
@@ -454,7 +461,7 @@ public class T_AttenceController {
                         tr.setRp_time(time1);//奖惩记录产生的日期
                         tr.setRp_reason("下午旷工");//之前的原因是对应的
                         boolean falg2=trs.deleteRwdpen(tr);
-                        request.setAttribute("x4","下班卡打卡成功，上班正常，下班正常！");
+                        request.setAttribute("x1","下班卡打卡成功，上班正常，下班正常！");
                         return "emp/e_empFrist";
                     }else if (a>=down_3time&&a<downtime){//下班时早退，将state的状态改为3；
                         //将状态改变为state=3；
@@ -471,12 +478,12 @@ public class T_AttenceController {
                         tr1.setE_id(e_id);//获取员工id
                         double money2=money1*0.4;//当天工资的25%；
                         tr1.setRp_money(money2);//扣除的钱
-                        tr1.setRp_month(mtime);//奖惩产生的月份
+                        tr1.setRp_moth(mtime);//奖惩产生的月份
                         tr1.setRp_time(time1);//奖惩记录产生的日期
                         tr1.setRp_reason("下班早退");//奖惩记录产生的原因
                         tr1.setRp_state(0);//state=0;说明是处罚
                         boolean falg3=trs.saveRwdpen(tr1);
-                        request.setAttribute("x5","下班卡打卡成功，上班正常，下班早退！");
+                        request.setAttribute("x1","下班卡打卡成功，上班正常，下班早退！");
                         return "emp/e_empFrist";
                     }else if(a>=down1time){//加班的状态了，将state=5；
                         //将状态改变为state=5；
@@ -498,15 +505,15 @@ public class T_AttenceController {
                         long onehour=1000*60*60;
                         int x= (int) ((a-down1time)/onehour);
                         tr1.setRp_money(money1+x*100);//
-                        tr1.setRp_month(mtime);//奖惩产生的月份
+                        tr1.setRp_moth(mtime);//奖惩产生的月份
                         tr1.setRp_time(time1);//奖惩记录产生的日期
                         tr1.setRp_reason("加班");//奖惩记录产生的原因
                         tr1.setRp_state(1);//state=1;说明是奖励
                         boolean falg3=trs.saveRwdpen(tr1);
-                        request.setAttribute("x6","下班卡打卡成功，上班正常，下班加班！");
+                        request.setAttribute("x1","下班卡打卡成功，上班正常，下班加班！");
                         return "emp/e_empFrist";
                     }else{//不做改变，维持之前第一次的修改。
-                        request.setAttribute("x7","下班卡打卡成功，上班正常，下班旷工！");
+                        request.setAttribute("x1","下班卡打卡成功，上班正常，下班旷工！");
                         return "emp/e_empFrist";
                     }
                 }else if (state==5){//这个状态只能继续加班了，state=5，不做改变，奖励做出修改
@@ -526,16 +533,16 @@ public class T_AttenceController {
                     long onehour=1000*60*60;
                     int x= (int) ((a-down1time)/onehour);
                     tr1.setRp_money(money1+x*100);//
-                    tr1.setRp_month(mtime);//奖惩产生的月份
+                    tr1.setRp_moth(mtime);//奖惩产生的月份
                     tr1.setRp_time(time1);//奖惩记录产生的日期
                     tr1.setRp_reason("加班");//奖惩记录产生的原因
                     tr1.setRp_state(1);//state=1;说明是奖励
                     boolean falg3=trs.saveRwdpen(tr1);
-                    request.setAttribute("x8","下班卡打卡成功，上班正常，下班加加班！");
+                    request.setAttribute("x1","下班卡打卡成功，上班正常，下班加加班！");
                     return "emp/e_empFrist";
                 }else if (state==10){//这个状态之后打卡只能有两种状态，正常下班或者加班
                     if (a>=downtime&&a<down1time){//这个时间状态在加班之前，正常打卡之后，还是属于正常，不做改变
-                        request.setAttribute("x9","下班卡打卡成功，上班正常，下班正常！");
+                        request.setAttribute("x1","下班卡打卡成功，上班正常，下班正常！");
                         return "emp/e_empFrist";
                     }else{//a>down1time,改变状态state=5，将生成加班奖励
                         //将状态改变为state=5；
@@ -551,12 +558,12 @@ public class T_AttenceController {
                         long onehour=1000*60*60;
                         int x= (int) ((a-down1time)/onehour);
                         tr1.setRp_money(money1+x*100);//
-                        tr1.setRp_month(mtime);//奖惩产生的月份
+                        tr1.setRp_moth(mtime);//奖惩产生的月份
                         tr1.setRp_time(time1);//奖惩记录产生的日期
                         tr1.setRp_reason("加班");//奖惩记录产生的原因
                         tr1.setRp_state(1);//state=1;说明是奖励
                         boolean falg3=trs.saveRwdpen(tr1);
-                        request.setAttribute("x10","下班卡打卡成功，上班正常，下班加班！");
+                        request.setAttribute("x1","下班卡打卡成功，上班正常，下班加班！");
                         return "emp/e_empFrist";
                     }
                 }else if(state==6){//上班的时候是迟到的，下班是早退的，根据时间修改状态。
@@ -575,7 +582,7 @@ public class T_AttenceController {
                         tr.setRp_time(time1);//奖惩记录产生的日期
                         tr.setRp_reason("下班早退");//之前的原因是对应的
                         boolean falg2=trs.deleteRwdpen(tr);
-                        request.setAttribute("y2","下班卡打卡成功，上班迟到，下班正常！");
+                        request.setAttribute("y1","下班卡打卡成功，上班迟到，下班正常！");
                         return "emp/e_empFrist";
                     }else{//这个状态就是加班的情况，删除之前的早退惩罚，增加加班奖励，将state改为=8；
                         //将状态改变为state=8；
@@ -597,12 +604,12 @@ public class T_AttenceController {
                         long onehour=1000*60*60;
                         int x= (int) ((a-down1time)/onehour);
                         tr1.setRp_money(money1+x*100);//
-                        tr1.setRp_month(mtime);//奖惩产生的月份
+                        tr1.setRp_moth(mtime);//奖惩产生的月份
                         tr1.setRp_time(time1);//奖惩记录产生的日期
                         tr1.setRp_reason("加班");//奖惩记录产生的原因
                         tr1.setRp_state(1);//state=1;说明是奖励
                         boolean falg3=trs.saveRwdpen(tr1);
-                        request.setAttribute("y3","下班卡打卡成功，上班迟到，下班加班！");
+                        request.setAttribute("y1","下班卡打卡成功，上班迟到，下班加班！");
                         return "emp/e_empFrist";
                     }
                 }else if (state==7){//这个状态会有很多的情况
@@ -617,7 +624,7 @@ public class T_AttenceController {
                         tr.setRp_time(time1);//奖惩记录产生的日期
                         tr.setRp_reason("下午旷工");//之前的原因是对应的
                         boolean falg2=trs.deleteRwdpen(tr);
-                        request.setAttribute("y4","下班卡打卡成功，上班迟到，下班正常！");
+                        request.setAttribute("y1","下班卡打卡成功，上班迟到，下班正常！");
                         return "emp/e_empFrist";
                     }else if (a>=down_3time&&a<downtime){//下班时早退，将state的状态改为6；
                         //将状态改变为state=6；
@@ -634,12 +641,12 @@ public class T_AttenceController {
                         tr1.setE_id(e_id);//获取员工id
                         double money2=money1*0.4;//当天工资的25%；
                         tr1.setRp_money(money2);//扣除的钱
-                        tr1.setRp_month(mtime);//奖惩产生的月份
+                        tr1.setRp_moth(mtime);//奖惩产生的月份
                         tr1.setRp_time(time1);//奖惩记录产生的日期
                         tr1.setRp_reason("下班早退");//奖惩记录产生的原因
                         tr1.setRp_state(0);//state=0;说明是处罚
                         boolean falg3=trs.saveRwdpen(tr1);
-                        request.setAttribute("y5","下班卡打卡成功，上班迟到，下班早退！");
+                        request.setAttribute("y1","下班卡打卡成功，上班迟到，下班早退！");
                         return "emp/e_empFrist";
                     }else if(a>=down1time){//加班的状态了，将state=8；
                         //将状态改变为state=8；
@@ -661,15 +668,15 @@ public class T_AttenceController {
                         long onehour=1000*60*60;
                         int x= (int) ((a-down1time)/onehour);
                         tr1.setRp_money(money1+x*100);//
-                        tr1.setRp_month(mtime);//奖惩产生的月份
+                        tr1.setRp_moth(mtime);//奖惩产生的月份
                         tr1.setRp_time(time1);//奖惩记录产生的日期
                         tr1.setRp_reason("加班");//奖惩记录产生的原因
                         tr1.setRp_state(1);//state=1;说明是奖励
                         boolean falg3=trs.saveRwdpen(tr1);
-                        request.setAttribute("y6","下班卡打卡成功，上班迟到，下班加班！");
+                        request.setAttribute("y1","下班卡打卡成功，上班迟到，下班加班！");
                         return "emp/e_empFrist";
                     }else{//不做改变，维持之前第一次的修改。
-                        request.setAttribute("y7","下班卡打卡成功，上班迟到，下班旷工！");
+                        request.setAttribute("y1","下班卡打卡成功，上班迟到，下班旷工！");
                         return "emp/e_empFrist";
                     }
                 }else if(state==8){//这个状态只能继续加班了，state=8，不做改变，奖励做出修改
@@ -689,16 +696,16 @@ public class T_AttenceController {
                     long onehour=1000*60*60;
                     int x= (int) ((a-down1time)/onehour);
                     tr1.setRp_money(money1+x*100);//
-                    tr1.setRp_month(mtime);//奖惩产生的月份
+                    tr1.setRp_moth(mtime);//奖惩产生的月份
                     tr1.setRp_time(time1);//奖惩记录产生的日期
                     tr1.setRp_reason("加班");//奖惩记录产生的原因
                     tr1.setRp_state(1);//state=1;说明是奖励
                     boolean falg3=trs.saveRwdpen(tr1);
-                    request.setAttribute("y8","下班卡打卡成功，上班迟到，下班加加班！");
+                    request.setAttribute("y1","下班卡打卡成功，上班迟到，下班加加班！");
                     return "emp/e_empFrist";
                 }else{//state==9;//这个状态之后打卡只能有两种状态，正常下班或者加班
                     if (a>=downtime&&a<down1time){//这个时间状态在加班之前，正常打卡之后，还是属于正常，不做改变
-                        request.setAttribute("y9","下班卡打卡成功，上班迟到，下班正常！");
+                        request.setAttribute("y1","下班卡打卡成功，上班迟到，下班正常！");
                         return "emp/e_empFrist";
                     }else{//a>down1time,改变状态state=8，将生成加班奖励
                         //将状态改变为state=8；
@@ -714,12 +721,12 @@ public class T_AttenceController {
                         long onehour=1000*60*60;
                         int x= (int) ((a-down1time)/onehour);
                         tr1.setRp_money(money1+x*100);//
-                        tr1.setRp_month(mtime);//奖惩产生的月份
+                        tr1.setRp_moth(mtime);//奖惩产生的月份
                         tr1.setRp_time(time1);//奖惩记录产生的日期
                         tr1.setRp_reason("加班");//奖惩记录产生的原因
                         tr1.setRp_state(1);//state=1;说明是奖励
                         boolean falg3=trs.saveRwdpen(tr1);
-                        request.setAttribute("y10","下班卡打卡成功，上班正常，下班加班！");
+                        request.setAttribute("y1","下班卡打卡成功，上班正常，下班加班！");
                         return "emp/e_empFrist";
                     }
                 }
@@ -727,6 +734,30 @@ public class T_AttenceController {
         }else{
             request.setAttribute("nobegintime","您没有打上班卡，不能打下班卡");
             return "emp/e_empFrist";
+        }
+    }
+    //管理员查看考勤
+    @RequestMapping("/m_attence")
+    public String m_attence(int currentPage,HttpServletRequest request){
+        List<T_Attence> ta=tas.getAllAttence();
+        if (ta.size()!=0){
+            int totalRows = ta.size();
+            int totalPages = DoPage.getTotalPages(totalRows);//总页数
+            final int PAGESIZE = 5;
+
+            Map<String, Object> data = new HashMap<>();
+            data.put("currentPage", (currentPage - 1) * PAGESIZE + 1);
+            data.put("pageSize", (currentPage) * PAGESIZE);
+
+
+            List<T_Attence> tat=tas.get_AllAttenceCuu(data);
+            request.setAttribute("tat", tat);
+            request.setAttribute("totalPages",totalPages);
+
+            return  "manager/m_getAttence";
+        }else{
+            request.setAttribute("notAttence","暂时没有考勤记录");
+            return  "manager/m_getAttence";
         }
     }
 }

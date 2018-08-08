@@ -66,4 +66,21 @@ public class T_EmpServiceImpl implements T_EmpService {
     public List<T_Emp> getEmpByState0(T_Emp t_emp) {
         return tem.getEmpByState0(t_emp);
     }
+
+    @Override
+    public boolean updateEmpxxx(T_Emp t_emp) {
+        return tem.updateEmpxxx(t_emp);
+    }
+
+    @Override
+    public List<T_Emp> getT_EmpByNoState3(T_Emp t_emp) {
+        return tem.getT_EmpByNoState3(t_emp);
+    }
+
+    @Override
+    public T_Emp getEmpByPidAndDid(T_Emp t_emp) {
+        return tem.getEmpByPidAndDid(t_emp);
+    }
+
+
 }

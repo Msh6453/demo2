@@ -61,6 +61,9 @@
             text-decoration: none;
             color: black;
         }
+        td{
+            text-align:center;
+        }
     </style>
 </head>
 <body>
@@ -139,7 +142,7 @@
                         <a href="updateemp1?e_id=<%=t.get(i).getE_id()%>"><button >换岗</button></a>
                     </td>
                     <td>
-                        <a href="deleteemp?e_state=<%=t.get(i).getE_state()%>&e_id=<%=t.get(i).getE_id()%>"><button >删除</button></a>
+                        <a href="deleteemp?e_state=<%=t.get(i).getE_state()%>&e_id=<%=t.get(i).getE_id()%>"><button >让他离职</button></a>
                     </td>
                 </tr>
                 <%

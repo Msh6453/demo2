@@ -86,6 +86,8 @@ public class T_EmpController {
         int f_id= (int) session.getAttribute("f_id");
         int state=8;
         T_Feedback tFeedback1=new T_Feedback();
+        tFeedback1.setF_id(f_id);
+        tFeedback1.setF_state(state);
         boolean falg1=tfs.updateFeedBackState(tFeedback1);
 
 
@@ -133,11 +135,10 @@ public class T_EmpController {
         int currentPage=1;
         if (e_state==3){
             request.setAttribute("state3","该员工已经离职了");
-
             return  getT_Emp( currentPage, request);
         }
         T_Emp tEmp=new T_Emp();
-        tEmp.setE_state(e_state);
+        tEmp.setE_state(3);
         tEmp.setE_id(e_id);
         boolean falg=tes.updateT_EmpState(tEmp);
         return  getT_Emp( currentPage, request);

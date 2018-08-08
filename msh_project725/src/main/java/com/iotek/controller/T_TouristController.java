@@ -1,8 +1,10 @@
 package com.iotek.controller;
 
 import com.iotek.model.T_Recruit;
+import com.iotek.model.T_Resume;
 import com.iotek.model.T_Tourist;
 import com.iotek.service.T_RecruitService;
+import com.iotek.service.T_ResumeService;
 import com.iotek.service.T_TouristService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +26,8 @@ public class T_TouristController {
     private T_TouristService ts;
     @Resource
     private T_RecruitService trs;
+    @Resource
+    private T_ResumeService trss;
     @RequestMapping("/recruit2")
     public String getRecruit(int currentPage,HttpServletRequest request){
         if (currentPage==0){
@@ -69,6 +73,34 @@ public class T_TouristController {
             return "../../index";
         }
     }
+
+    @RequestMapping("/saveFeedback1")
+    public String saveFeedback1(int r_id,int currentPage, HttpSession session,HttpServletRequest request){
+        T_Tourist tourist= (T_Tourist) session.getAttribute("tour");
+        T_Resume t_resume = new T_Resume();
+        t_resume.setT_id(tourist.getT_id());
+        List<T_Resume> t_resumes=trss.getresume(t_resume);
+        int totalRows =t_resumes.size();
+        int totalPages = DoPage.getTotalPages(totalRows);//总页数
+        final int PAGESIZE=5;
+        Map<String,Object> data=new HashMap<>();
+        data.put("currentPage",(currentPage-1)*PAGESIZE+1);
+        data.put("pageSize",(currentPage) * PAGESIZE);
+        data.put("tid",tourist.getT_id());
+        List<T_Resume> tResumes=trss.get(data);
+        if (tResumes.size()!=0){
+            request.setAttribute("totalPages",totalPages);
+
+            request.setAttribute("tResumes",tResumes);
+
+            session.setAttribute("r_id",r_id);
+            return"saveFeedback11";
+        }else{
+            request.setAttribute("noResumes","您还没有添加简历");
+            return getRecruit(currentPage,request);
+        }
+    }
+
     @RequestMapping("/res")
     public String register(T_Tourist t_tourist,HttpServletRequest request){
         T_Tourist tourist=ts.getTouristById(t_tourist);

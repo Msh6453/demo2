@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.iotek.dao.T_AttenceMapper">
     <insert id="saveAttence">
-        INSERT INTO T_ATTENCE(A_ID, A_TODAY, A_BEGINTIME, A_ENDTIME, A_STATE, E_ID,A_STATEX)
-        VALUES (SEQ_ATTENCE.nextval,#{a_today},#{a_begintime},#{a_endtime},#{a_state},#{e_id},#{a_statex})
+        INSERT INTO T_ATTENCE(A_ID,A_MOTH, A_TODAY, A_BEGINTIME, A_ENDTIME, A_STATE, E_ID,A_STATEX)
+        VALUES (SEQ_ATTENCE.nextval,#{a_moth},#{a_today},#{a_begintime},#{a_endtime},#{a_state},#{e_id},#{a_statex})
     </insert>
     <update id="updateAttenceEndtime">
         UPDATE T_ATTENCE SET A_ENDTIME=#{a_endtime} WHERE A_ID=#{a_id}
@@ -17,4 +17,25 @@
     <select id="getAttenceByTodayAndE_id" resultType="com.iotek.model.T_Attence">
         SELECT * FROM  T_ATTENCE WHERE E_ID=#{e_id} and A_TODAY=#{a_today}
     </select>
+    <select id="getT_AttenceByStatex" resultType="com.iotek.model.T_Attence">
+        SELECT * FROM T_ATTENCE WHERE  E_ID=#{e_id} AND A_MOTH AND A_STATEX=#{a_statex}
+    </select>
+    <select id="getAllAttence" resultType="com.iotek.model.T_Attence">
+        SELECT * FROM  T_ATTENCE
+    </select>
+    <select id="get_AllAttenceCuu" resultType="com.iotek.model.T_Attence">
+        SELECT * FROM (
+    SELECT  rownum rn,u.* FROM T_ATTENCE u )gd
+    WHERE gd.rn BETWEEN #{currentPage} and #{pageSize}
+
+    </select>
+    <select id="getAllAttenceByEid" resultType="com.iotek.model.T_Attence">
+        SELECT * FROM  T_ATTENCE WHERE E_ID=#{e_id}
+    </select>
+    <select id="getAllAttenceByEidCuu" resultType="com.iotek.model.T_Attence">
+         SELECT * FROM (
+    SELECT  rownum rn,u.* FROM T_ATTENCE u WHERE E_ID=#{e_id})gd
+    WHERE gd.rn BETWEEN #{currentPage} and #{pageSize}
+    </select>
+
 </mapper>

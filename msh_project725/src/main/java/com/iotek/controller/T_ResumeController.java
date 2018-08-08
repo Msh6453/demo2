@@ -51,11 +51,42 @@ public class T_ResumeController {
         List<T_Resume> tResumes=ts.get(data);
         if (tResumes.size()!=0){
             request.setAttribute("totalPages",totalPages);
+            session.setAttribute("totalPages",totalPages);
             request.setAttribute("tResumes",tResumes);
+            session.setAttribute("tResumes",tResumes);
             return "tourist";
         }else{
             request.setAttribute("noResumes","您还没有添加简历");
             return "tourist";
+        }
+    }
+
+
+
+
+    @RequestMapping("/getresume1")
+    public String getresume1(int currentPage,HttpServletRequest request,HttpSession session){
+        T_Tourist tourist= (T_Tourist) session.getAttribute("tour");
+        T_Resume t_resume = new T_Resume();
+        t_resume.setT_id(tourist.getT_id());
+        List<T_Resume> t_resumes=ts.getresume(t_resume);
+        int totalRows =t_resumes.size();
+        int totalPages = DoPage.getTotalPages(totalRows);//总页数
+        final int PAGESIZE=5;
+        Map<String,Object> data=new HashMap<>();
+        data.put("currentPage",(currentPage-1)*PAGESIZE+1);
+        data.put("pageSize",(currentPage) * PAGESIZE);
+        data.put("tid",tourist.getT_id());
+        List<T_Resume> tResumes=ts.get(data);
+        if (tResumes.size()!=0){
+
+            session.setAttribute("totalPages",totalPages);
+
+            session.setAttribute("tResumes",tResumes);
+            return "saveFeedback11";
+        }else{
+            request.setAttribute("noResumes","您还没有添加简历");
+            return "saveFeedback11";
         }
     }
     @RequestMapping("/updateresume1")

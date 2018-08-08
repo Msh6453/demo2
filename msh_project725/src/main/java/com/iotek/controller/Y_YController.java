@@ -19,11 +19,7 @@ public class Y_YController {
     public String exit(){
         return"../../index";
     }
-    @RequestMapping("/saveFeedback1")
-    public String saveFeedback1(int r_id, HttpSession session){
-        session.setAttribute("r_id",r_id);
-        return"saveFeedback11";
-    }
+
    /* @RequestMapping("/emplogin")
     public String emplogin(){
         return "emp/"

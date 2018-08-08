@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.iotek.model.T_Resume" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.sun.corba.se.spi.ior.IdentifiableFactory" %><%--
@@ -245,7 +246,7 @@
 <body>
 <%
     List<T_Resume> tr= (List<T_Resume>) request.getAttribute("tResumes");
-    int totalPages= (int) request.getAttribute("totalPages");
+
 
 %>
 <div  id="da">
@@ -316,13 +317,14 @@
                         }
                     %>
                 </table>
-                <%
-                    for (int i = 1; i <=totalPages; i++) {
-                %>
-                <a href="getresume?currentPage=<%=i%>"><%=i%></a>
-                <%
-                    }
-                %>
+                <tr>
+                    <td colspan="14">
+                        <c:forEach begin="1" end="${requestScope.totalPages}" var="pagesize">
+                            <a href="getresume?currentPage=${pagesize}">${pagesize}</a>
+                        </c:forEach>
+                    </td>
+                </tr>
+
                 ${requestScope.noResumes}
             </div>
             <div id="dd2">

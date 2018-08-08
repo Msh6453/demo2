@@ -11,6 +11,9 @@
     <update id="updateT_EmpState">
         UPDATE T_EMP SET E_STATE=#{e_state} WHERE E_ID=#{e_id}
     </update>
+    <update id="updateEmpxxx">
+        UPDATE T_EMP SET E_PASSWORD=#{e_password},E_TEL=#{e_tel},e_address=#{e_address} WHERE E_ID=#{e_id}
+    </update>
     <select id="getT_EmpByd_id" resultType="com.iotek.model.T_Emp">
         SELECT * FROM  T_EMP WHERE D_ID=#{d_id} and E_STATE !=#{e_state}
     </select>
@@ -33,5 +36,12 @@
     </select>
     <select id="getEmpByState0" resultType="com.iotek.model.T_Emp">
         SELECT * FROM  T_EMP WHERE E_STATE=#{e_state}
+    </select>
+    <select id="getT_EmpByNoState3" resultType="com.iotek.model.T_Emp">
+        SELECT * FROM  T_EMP WHERE E_STATE !=#{e_state}
+    </select>
+    <select id="getEmpByPidAndDid" resultType="com.iotek.model.T_Emp">
+        SELECT * FROM T_EMP WHERE P_ID=#{p_id} AND D_ID=#{d_id}
+
     </select>
 </mapper>

@@ -50,7 +50,7 @@
             text-decoration: none;
             color: white;
         }
-        #a3,#a4,#a5,#a6,#a7{
+        #a3,#a4,#a5,#a6,#a7,#a8,#a9{
             font-size: 20px;
             text-decoration: none;
             color: black;
@@ -82,6 +82,9 @@
             <a id="a5" href="m_emp" >员工管理</a>&nbsp;&nbsp; &nbsp;&nbsp;
             <a id="a6" href="m_deptAndposition" >部门/职位</a>&nbsp;&nbsp; &nbsp;&nbsp;
             <a id="a7" href="m_train" >培训中心</a>&nbsp;&nbsp; &nbsp;&nbsp;
+            <a id="a8" href="m_salary" >薪资管理</a>&nbsp;&nbsp; &nbsp;&nbsp;
+            <a id="a9" href="m_rwdpen" >奖惩管理</a>&nbsp;&nbsp; &nbsp;&nbsp;
+            <a id="a9" href="m_attence?currentPage=1" >查看考勤</a>&nbsp;&nbsp; &nbsp;&nbsp;
             <br/>
             ${requestScope.nostate6}
         </div>

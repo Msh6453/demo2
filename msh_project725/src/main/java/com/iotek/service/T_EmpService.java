@@ -34,4 +34,11 @@ public interface T_EmpService {
     T_Emp getEmpByNumAndPassword(T_Emp t_emp);
     //查找试用期的员工
     List<T_Emp> getEmpByState0(T_Emp t_emp);
+    //修改密码、电话、地址
+    boolean updateEmpxxx(T_Emp t_emp);
+
+    //查找在职的员工state!=3
+    List<T_Emp> getT_EmpByNoState3(T_Emp t_emp);
+    //通过p_id和d_id查找员工
+    T_Emp getEmpByPidAndDid(T_Emp t_emp);
 }

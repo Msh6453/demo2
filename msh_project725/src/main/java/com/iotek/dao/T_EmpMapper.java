@@ -34,5 +34,12 @@ public interface T_EmpMapper {
     //员工状态
     //员工登录（开始员工部分）
     T_Emp getEmpByNumAndPassword(T_Emp t_emp);
+    //修改密码、电话、地址
+    boolean updateEmpxxx(T_Emp t_emp);
 
+    //查找在职的员工state!=3
+    List<T_Emp> getT_EmpByNoState3(T_Emp t_emp);
+
+    //通过p_id和d_id查找员工
+    T_Emp getEmpByPidAndDid(T_Emp t_emp);
 }
