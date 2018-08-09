@@ -102,7 +102,7 @@ public class T_EmpController {
         boolean falg=tes.saveTemp(t_emp);
         request.setAttribute("temp","成功添加员工");
         int currentPage=1;
-        return saveemp1( currentPage, request);
+        return "manager/m_emp";
     }
     //查看所有员工
     @RequestMapping("/getT_Emp")

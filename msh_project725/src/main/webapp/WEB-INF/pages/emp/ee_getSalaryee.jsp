@@ -1,9 +1,8 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
+<%@ page import="com.iotek.model.T_Salary" %><%--
   Created by IntelliJ IDEA.
   User: Administrator
-  Date: 2018/8/8
-  Time: 17:20
+  Date: 2018/9/11
+  Time: 20:44
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -65,15 +64,30 @@
     </style>
     <script src="jq-resources/jquery.js"></script>
     <script>
+        $(function () {
+            $("#n1").blur(function () {
+                var p = $("#n1").val();
+                var reg = /^[2]\d{3}-(0[1-9]|1[0-2])/;
+                if (reg.test(p)) {
+                    $("#n10").removeAttr("disabled")
+                    $("#n1").css('border','2px solid green');
+                } else {
+                    $("#n10").attr("disabled", "a")
+                    $("#n1").css('border','1px solid red');
+                }
+            })
+        })
     </script>
 </head>
 <body>
-
+<%
+    T_Salary ts1= (T_Salary) request.getAttribute("ts2");
+%>
 <div  id="da">
     <div id="d1">
-        <h2>奖惩详情</h2>
+        <h2>薪资详情</h2>
         <div id="d4">
-            &nbsp;&nbsp; <span><a id="a1" href="mananger">管理员界面</a></span>
+            &nbsp;&nbsp; <span><a id="a1" href="empjsp">员工主界面</a></span>
             &nbsp;&nbsp;<span><a id="a2" href="exit1">退出</a></span>
         </div>
     </div>
@@ -81,45 +95,41 @@
         <img src="img/01.jpg">
 
         <div id="d3">
+            <form action="getSalaryByMonth" method="post">
+                选择月份：<input type="text" id="n1" name="month">
 
+                <input type="submit" id="n10" value="查询">
+                <span>格式：2018-07</span>
+            </form>
 
             <table border=":solid 1px "  style="margin:auto;">
                 <tr>
                     <th>ID</th>
                     <th>月份</th>
-                    <th>日期</th>
-                    <th>状态</th>
-                    <th>费用</th>
-                    <th>原因</th>
+                    <th>基本薪资</th>
+                    <th>奖惩金额</th>
+                    <th>社保费用</th>
+                    <th>绩效奖金</th>
+                    <th>实发工资</th>
+                    <th>申请复议</th>
                 </tr>
-                <c:forEach items="${requestScope.tr2}" var="re">
+
                 <tr>
-                    <td>${re.rp_id}</td>
-                    <td>${re.rp_moth}</td>
-                    <td>${re.rp_time}</td>
-                    <td>
-                        <c:if test="${re.rp_state==0}">
-                            ${"惩罚"}
-                        </c:if>
-                        <c:if test="${re.rp_state==1}">
-                            ${"奖励"}
-                        </c:if>
-                    </td>
-                    <td>${re.rp_money}</td>
-                    <td>${re.rp_reason}</td>
-                <tr>
-                    </c:forEach>
-                    <td colspan="7">
-                        <c:forEach begin="1" end="${requestScope.totalPages}" var="pagesize">
-                            <a href="e_rwdpen?currentPage=${pagesize}">${pagesize}</a>
-                        </c:forEach>
-                    </td>
+                    <td><%=ts1.getSa_id()%></td>
+                    <td><%=ts1.getSa_month()%></td>
+                    <td><%=ts1.getSa_salary()%></td>
+                    <td><%=ts1.getSa_rpcost()%></td>
+                    <td><%=ts1.getSa_sscost()%></td>
+                    <td><%=ts1.getSa_bonus()%></td>
+                    <td><%=ts1.getSa_allsalary()%></td>
+                    <td><a href="saveAppeal2?month=<%=ts1.getSa_month()%>"><button >申请复议</button></a></td>
                 </tr>
             </table>
-
+            ${requestScope.nojiesuan}
+            ${requestScope.noSalary}
+            ${requestScope.haveapp}
         </div>
     </div>
 </div>
 </body>
 </html>
-

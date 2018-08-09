@@ -398,8 +398,9 @@
                         </tr>
                     </table>
 
-                        <input id="n10"  type="submit" value="提交">
+                        <input id="n10" disabled="disabled" type="submit" value="提交">
                 </form>
+                ${requestScope.nokong}
             </div>
         </div>
     </div>

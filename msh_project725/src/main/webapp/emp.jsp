@@ -39,7 +39,7 @@
             left: 500px;
             top: 400px;
             width: 300px;
-            height: 200px;
+            height: 260px;
             text-align: center;
             background-color:rgba(0,0,0,0.2);
         }

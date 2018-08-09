@@ -75,6 +75,20 @@
                 }
             })
         })
+        $(function () {
+            $("#pos").blur(function () {
+                var p = $("#pos").val();
+                var reg = /\S/;
+                if (reg.test(p)) {
+                    $("#n10").removeAttr("disabled")
+                    $("#pos").css('border','2px solid green');
+                } else {
+                    $("#n10").attr("disabled", "a")
+                    $("#pos").css('border','1px solid red');
+                }
+            })
+        })
+
 
         $(function () {
             $("#n2").blur(function () {
@@ -255,7 +269,7 @@
 
                 </table>
 
-                <input id="n10"  type="submit" value="提交">
+                <input id="n10" disabled="disabled" type="submit" value="提交">
             </form>
         </div>
     </div>

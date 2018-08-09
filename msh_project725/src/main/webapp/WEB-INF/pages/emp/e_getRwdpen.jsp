@@ -117,10 +117,10 @@
                     <td>${re.rp_moth}</td>
                     <td>${re.rp_time}</td>
                     <td>
-                        <c:if test="${re.state==0}">
+                        <c:if test="${re.rp_state==0}">
                             ${"惩罚"}
                         </c:if>
-                        <c:if test="${re.state==1}">
+                        <c:if test="${re.rp_state==1}">
                             ${"奖励"}
                         </c:if>
                     </td>

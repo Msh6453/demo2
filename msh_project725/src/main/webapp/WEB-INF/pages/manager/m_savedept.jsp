@@ -90,7 +90,7 @@
             <form method="post" action="savedept11">
                 部门名称：<input id="n1" type="text" name="d_name">
 
-                <input id="n10" type="submit" value="提交">
+                <input id="n10" disabled="disabled" type="submit" value="提交">
             </form>
             ${requestScope.dept1}
         </div>

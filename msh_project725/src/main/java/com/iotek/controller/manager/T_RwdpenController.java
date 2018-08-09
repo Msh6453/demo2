@@ -44,10 +44,15 @@ public class T_RwdpenController {
     //添加奖惩
     @RequestMapping("/saveRwdpen2")
     public String saveRwdpen2(T_Rwdpen t_rwdpen,int d_id,int p_id,HttpServletRequest request)throws Exception {
+        if (t_rwdpen.getRp_money()==0||t_rwdpen.getRp_reason()==""){
+            request.setAttribute("noxx","奖惩金额或原因不能为空！");
+            return saveRwdpen(request);
+        }
         if (d_id==0||p_id==0){
             request.setAttribute("noid","请选择部门和职位！");
-            return "manager/saveRwdpen2";
+            return saveRwdpen(request);
         }
+        System.out.println(t_rwdpen);
 
 
         //先是通过部门id和职位id查找出员工id
@@ -55,6 +60,10 @@ public class T_RwdpenController {
         te.setD_id(d_id);
         te.setP_id(p_id);
         T_Emp tEmp = tes.getEmpByPidAndDid(te);
+        if (tEmp==null){
+            request.setAttribute("noemp","该职位没有员工！");
+            return saveRwdpen(request);
+        }
         int eid = tEmp.getE_id();
         Date day = new Date();//获取当前时间
         //产生奖惩记录的时候会用到。。。。。

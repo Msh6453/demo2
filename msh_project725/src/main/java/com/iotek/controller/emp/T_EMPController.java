@@ -207,7 +207,7 @@ public class T_EMPController {
         }
         long today=day.getTime();
         System.out.println(today);
-        System.out.println("xxxxxx");
+        System.out.println("ccccccccccc");
         System.out.println(day102);
 
         if (today>day102){//判断当前时间是否在当月10号之后
@@ -234,8 +234,8 @@ public class T_EMPController {
         System.out.println(ts1);
 
         if (ts1!=null){
-            request.setAttribute("ts2", ts1);
-            return "emp/e_getSalary";
+            request.setAttribute("ts2",ts1);
+            return "emp/ee_getSalaryee";
         }else{
             request.setAttribute("noSalary","上月没有薪资！");
             return "emp/e_getSalary";
@@ -263,6 +263,8 @@ public class T_EMPController {
     public String saveAppeal(T_Appeal t_appeal, HttpServletRequest request, HttpSession session)throws Exception {
         T_Emp e = (T_Emp) session.getAttribute("emp");
         int e_id = e.getE_id();//获取到了员工id
+
+
         Date day = new Date();//获取当前时间
 
         SimpleDateFormat df0 = new SimpleDateFormat("yyyy-MM");//获取今天的月份
@@ -282,6 +284,8 @@ public class T_EMPController {
         tapp.setApp_time(time1);
         tapp.setApp_state(0);//state=0说明还未回复，state=1已经回复
         tapp.setE_id(e_id);
+        tapp.setApp_result("未回复");
+        System.out.println(tapp);
         boolean falg=tass.saveAppeal(tapp);
         request.setAttribute("haveapp","复议成功，等待处理！");
         return salary( request, session);

@@ -12,8 +12,6 @@ import java.util.Map;
 public interface T_TrainMapper {
     //新增培训，但是未发布的
     int  saveTrain(T_Train t_train);
-
-
     //查看所有培训
     List<T_Train> getT_Trains();
     //分页查看所有培训

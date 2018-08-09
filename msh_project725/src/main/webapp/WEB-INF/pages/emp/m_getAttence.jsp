@@ -94,8 +94,8 @@
                         <td>${re.a_id}</td>
                         <td>${re.a_moth}</td>
                         <td>${re.a_today}</td>
-                        <td>${re.begintime}</td>
-                        <td>${re.endtime}</td>
+                        <td>${re.a_begintime}</td>
+                        <td>${re.a_endtime}</td>
                         <td>
                             <c:if test="${re.a_state==0}">
                                 ${"上班卡正常"}

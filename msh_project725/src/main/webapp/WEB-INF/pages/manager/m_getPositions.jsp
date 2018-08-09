@@ -59,6 +59,9 @@
             text-decoration: none;
             color: black;
         }
+        td{
+            text-align: center;
+        }
     </style>
 </head>
 <body>

@@ -124,6 +124,7 @@
                     T_Train tt=t.getT_Train(ttt);
                 %>
                 <tr>
+                    <td><%=tt.getTra_id()%></td>
                     <td><%=tt.getTra_theme()%></td>
                     <td><%=tt.getTra_content()%></td>
                     <td><%=tt.getTra_obj()%></td>
@@ -139,7 +140,7 @@
                     }
                 %>
                 <tr>
-                    <td colspan="7">
+                    <td colspan="8">
                         <c:forEach begin="1" end="${requestScope.totalPages}" var="pagesize">
                             <a href="e_train?currentPage=${pagesize}">${pagesize}</a>
                         </c:forEach>

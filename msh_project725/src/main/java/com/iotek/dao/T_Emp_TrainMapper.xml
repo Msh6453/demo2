@@ -9,7 +9,7 @@
     </select>
     <select id="getEmpAndTrainByEidCurr" resultType="com.iotek.model.T_Emp_Train">
            SELECT * FROM (
-    SELECT  rownum rn,u.* FROM T_DEPT u WHERE E_ID=#{eid})gd
+    SELECT  rownum rn,u.* FROM T_EMP_TRAIN u WHERE E_ID=#{eid})gd
     WHERE gd.rn BETWEEN #{currentPage} and #{pageSize}
     </select>
 </mapper>

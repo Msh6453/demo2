@@ -61,7 +61,7 @@ public class T_AppealController {
     @RequestMapping("/m_getAppeal")
     public String m_getAppeal(int currentPage,HttpServletRequest request)throws Exception{
         T_Appeal tap=new T_Appeal();
-        int state=1;
+        int state=0;
         tap.setApp_state(state);
         List<T_Appeal> taa=tas.getAppealByState0(tap);
         if (taa.size()!=0){
@@ -91,7 +91,7 @@ public class T_AppealController {
         return "manager/m_updateAppeal2";
     }
     //管理员的回复复议就是修改并将state改为1
-    @RequestMapping("/ updateAppeal2")
+    @RequestMapping("/updateAppeal2")
     public String updateAppeal2(T_Appeal t_appeal,HttpServletRequest request){
         boolean falg=tas.updateAppeal(t_appeal);
         request.setAttribute("haveAppeal","复议已经回复！");

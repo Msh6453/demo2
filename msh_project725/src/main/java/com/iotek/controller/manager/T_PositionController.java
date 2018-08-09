@@ -110,9 +110,15 @@ public class T_PositionController {
     }
     //增加的职位，先确定在那个部门添加职位，并且判断该部门中的职位名是否重复
     @RequestMapping("/savePos2")
-    public  String savePos2(T_Position t_position,HttpServletRequest request)throws Exception{
+    public  String savePos2(int d_id,T_Position t_position,HttpServletRequest request)throws Exception{
+        System.out.println(d_id);
         if (t_position.getD_id()==0){
-            request.setAttribute("nod_id","请选择部门!");
+
+        }else if (t_position.getP_pay()==0){
+            request.setAttribute("nopay","请给工资!");
+            return  savepos1( request);
+        }else if (t_position.getP_name()==""){
+            request.setAttribute("noname","请添加职位名称!");
             return  savepos1( request);
         }
         //先判断重名

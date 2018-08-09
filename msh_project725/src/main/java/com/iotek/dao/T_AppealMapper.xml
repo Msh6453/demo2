@@ -14,7 +14,7 @@
     </select>
     <select id="getAppealByEidAndState1Curr" resultType="com.iotek.model.T_Appeal">
                 SELECT * FROM (
-    SELECT  rownum rn,u.* FROM T_ATTENCE u WHERE E_ID=#{e_id} AND APP_STATE=#{app_state} )gd
+    SELECT  rownum rn,u.* FROM T_APPEAL u WHERE E_ID=#{e_id} AND APP_STATE=#{app_state})gd
     WHERE gd.rn BETWEEN #{currentPage} and #{pageSize}
     </select>
     <select id="getAppealByState0" resultType="com.iotek.model.T_Appeal">
@@ -22,7 +22,7 @@
     </select>
     <select id="getAppealByState0Curr" resultType="com.iotek.model.T_Appeal">
          SELECT * FROM (
-    SELECT  rownum rn,u.* FROM T_ATTENCE u WHERE APP_STATE=#{app_state} )gd
+    SELECT  rownum rn,u.* FROM T_APPEAL u WHERE APP_STATE=#{app_state})gd
     WHERE gd.rn BETWEEN #{currentPage} and #{pageSize}
     </select>
     <select id="getAppeal" resultType="com.iotek.model.T_Appeal">

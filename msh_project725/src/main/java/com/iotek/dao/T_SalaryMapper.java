@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public interface T_SalaryMapper {
     //通过输入日期，检查这个月有没有结算工资
-    T_Salary getT_SalaryByDay10(T_Salary t_salary);
+    List<T_Salary> getT_SalaryByDay10(T_Salary t_salary);
     //添加生成薪资表
     boolean saveT_Salary(T_Salary t_salary);
     //根据员工id和月份查看薪资

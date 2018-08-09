@@ -79,6 +79,8 @@
             ${requestScope.success}
             ${requestScope.notAppeal}
             ${requestScope.haveAppeal}
+            ${requestScope.notday100}
+
         </div>
     </div>
 </div>

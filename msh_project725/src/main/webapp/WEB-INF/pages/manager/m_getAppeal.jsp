@@ -121,7 +121,7 @@
                 %>
                 <tr>
                     <td colspan="8">
-                        c:<c:forEach begin="1" end="${requestScope.totalPages}" var="pagesize">
+                        <c:forEach begin="1" end="${requestScope.totalPages}" var="pagesize">
                         <a href="m_getAppeal?currentPage=${pagesize}">${pagesize}</a>
                     </c:forEach>
                     </td>

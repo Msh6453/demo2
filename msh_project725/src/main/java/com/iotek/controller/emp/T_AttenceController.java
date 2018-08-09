@@ -95,12 +95,13 @@ public class T_AttenceController {
         tatt.setE_id(e_id);
         tatt.setA_today(time1);//今天日期
         T_Attence tatt1=tas.getAttenceByTodayAndE_id(tatt);
-        if (tatt1.getA_id()!=0){
+        if (tatt1!=null){
             request.setAttribute("tatt","您今天已经打过上班卡了！");
             return "emp/e_empFrist";
         }
 
-
+        System.out.println(nowtime);
+        System.out.println(uptime);
         if (nowtime<uptime){//正常上班
             //添加考勤记录，不产生奖惩
             T_Attence ta=new T_Attence();

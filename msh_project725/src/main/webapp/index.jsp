@@ -55,7 +55,7 @@
     <img src="img/01.jpg">
     <div id="d3">
         <form method="post" action="login">
-            <p>登录界面</p>
+            <p>游客登录界面</p>
             用户名：<input type="text" name="t_name"><br/><br/>
             &nbsp;&nbsp;密码：<input type="password" name="t_password"><br/><br/>
             &nbsp;&nbsp;<input type="submit" value="登录"> &nbsp;&nbsp;  &nbsp;&nbsp;

@@ -31,4 +31,8 @@ public interface T_AttenceMapper {
     List<T_Attence> getAllAttence();
     //分页查看所有的考勤
     List<T_Attence> get_AllAttenceCuu(Map<String,Object> data);
+    //根据月份查出所有员工id
+    List<T_Attence> get_AllAttenceByMoth(T_Attence t_attence);
+
+
 }

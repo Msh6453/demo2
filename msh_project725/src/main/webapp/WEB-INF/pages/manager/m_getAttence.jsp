@@ -81,6 +81,7 @@
             <table border=":solid 1px "  style="margin:auto;">
                 <tr>
                     <th>ID</th>
+                    <th>员工ID</th>
                     <th>月份</th>
                     <th>日期</th>
                     <th>上班打卡时间</th>
@@ -92,10 +93,11 @@
                 <c:forEach items="${requestScope.tat}" var="re">
                     <tr>
                         <td>${re.a_id}</td>
+                        <td>${re.e_id}</td>
                         <td>${re.a_moth}</td>
                         <td>${re.a_today}</td>
-                        <td>${re.begintime}</td>
-                        <td>${re.endtime}</td>
+                        <td>${re.a_begintime}</td>
+                        <td>${re.a_endtime}</td>
                         <td>
                             <c:if test="${re.a_state==0}">
                                 ${"上班卡正常"}

@@ -18,7 +18,7 @@
         SELECT * FROM  T_ATTENCE WHERE E_ID=#{e_id} and A_TODAY=#{a_today}
     </select>
     <select id="getT_AttenceByStatex" resultType="com.iotek.model.T_Attence">
-        SELECT * FROM T_ATTENCE WHERE  E_ID=#{e_id} AND A_MOTH AND A_STATEX=#{a_statex}
+        SELECT * FROM T_ATTENCE WHERE  E_ID=#{e_id} AND A_MOTH=#{a_moth} AND A_STATEX=#{a_statex}
     </select>
     <select id="getAllAttence" resultType="com.iotek.model.T_Attence">
         SELECT * FROM  T_ATTENCE
@@ -36,6 +36,9 @@
          SELECT * FROM (
     SELECT  rownum rn,u.* FROM T_ATTENCE u WHERE E_ID=#{e_id})gd
     WHERE gd.rn BETWEEN #{currentPage} and #{pageSize}
+    </select>
+    <select id="get_AllAttenceByMoth" resultType="com.iotek.model.T_Attence">
+        SELECT * FROM T_ATTENCE WHERE A_MOTH=#{a_moth}
     </select>
 
 </mapper>

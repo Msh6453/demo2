@@ -163,6 +163,11 @@ public class T_TrainController {
     }
     @RequestMapping("/save2_Train")
     public String save2_Train(T_Train t_train,HttpServletRequest request)throws Exception{
+        if (t_train.getTra_theme()==""||t_train.getTra_content()==""||t_train.getTra_begintime()==""||
+                t_train.getTra_endtime()==""||t_train.getTra_address()==""){
+            request.setAttribute("xxxx","不能为空");
+            return saveTrain(request);
+        }
         //显示要判断，看t_train.tra_obj的值，若是选择的是试用期，就需要判断有没有人
         //如果是 选这部门培训，需要判断这个部门是不是有人。
         if (t_train.getTra_obj()==0){

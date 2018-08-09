@@ -61,11 +61,28 @@ public class T_SalaryController {
             request.setAttribute("notday10","今天不是结算工资的时间！");
             return "manager/m_salary";
         }
+        //生成上一个月的月份
+        Calendar c = Calendar.getInstance();
+        c.setTime(day);
+        c.add(Calendar.MONTH, -1);
+        Date m = c.getTime();
+        String uptime=df0.format(m);//上一个月的月份，如果2018-8，这个2018-7；
         //2.2先判断这个月10号有没有结算工资。
         T_Salary ts=new T_Salary();
-        ts.setSa_month(day10);
-        T_Salary ts1=tss.getT_SalaryByDay10(ts);
-        if (ts1!=null){//说明这个月10有结算过工资了，不能再结算了
+        ts.setSa_month(uptime);
+        List<T_Salary> ts1=tss.getT_SalaryByDay10(ts);
+
+        //结算工资只能结算有考勤的
+        T_Attence en=new T_Attence();
+        en.setA_moth(uptime);
+        List<T_Attence> tatt=tas.get_AllAttenceByMoth(en);
+        if (tatt.size()==0){
+            request.setAttribute("notday100","上月公司都没有考勤");
+            return "manager/m_salary";
+        }
+
+
+        if (ts1.size()!=0){//说明这个月10有结算过工资了，不能再结算了
             request.setAttribute("haveday10","这个月工资已经结算过了！");
             return "manager/m_salary";
         }else{
@@ -76,14 +93,10 @@ public class T_SalaryController {
             //double sa_rpcost;//奖惩总金额
             // double sa_sscost;//社保费用
             // double sa_bonus;//绩效奖金
-            for (int i = 0; i <tEmps.size() ; i++) {
-                int e_id=tEmps.get(i).getE_id();
-                //生成上一个月的月份
-                Calendar c = Calendar.getInstance();
-                c.setTime(day);
-                c.add(Calendar.MONTH, -1);
-                Date m = c.getTime();
-               String uptime=df0.format(m);//上一个月的月份，如果2018-8，这个2018-7；
+            for (int i = 0; i <tatt.size() ; i++) {
+                int e_id=tatt.get(i).getE_id();
+                System.out.println(e_id);
+
                 //基本工资
                 int p_id=tEmps.get(i).getP_id();
                 T_Position tp=new T_Position();
@@ -94,9 +107,11 @@ public class T_SalaryController {
                 attence.setA_statex(1);
                 attence.setE_id(e_id);
                 attence.setA_moth(uptime);
+                System.out.println("xxxxx");
+                System.out.println(attence);
                 List<T_Attence> list=tas.getT_AttenceByStatex(attence);
                 int count=list.size();
-
+                System.out.println(count);
 
 
                 int state=0;//状态为0；
@@ -106,6 +121,7 @@ public class T_SalaryController {
                 trp.setE_id(e_id);
                 trp.setRp_moth(uptime);
                 trp.setRp_state(1);
+                System.out.println(trp);
                 List<T_Rwdpen> trp1=trs.getT_RwdpenState1(trp);
                 double x=0;
                 for (int j = 0; j <trp1.size() ; j++) {
@@ -148,10 +164,12 @@ public class T_SalaryController {
                 if (count>=22){//判断是否考勤大于22天，这是考勤大于22天的总工资
                      allsalary=(-sscost1)+bonus1+(-statex0)+(-state0)+(state1)+pay;
                 }else{//这是考勤小于22天工资
-                    int xxx=22-count;
-                    double pay1=xxx*oneDayPay;
+
+                    double pay1=count*oneDayPay;
+                    System.out.println("xxx"+pay1);
                      allsalary=(-sscost1)+bonus1+(-statex0)+(-state0)+(state1)+pay1;
                 }
+                System.out.println(allsalary);
 
                 T_Salary tsss=new T_Salary();
                 tsss.setE_id(e_id);//员工ID

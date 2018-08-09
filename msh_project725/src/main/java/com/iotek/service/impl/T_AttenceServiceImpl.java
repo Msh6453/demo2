@@ -66,4 +66,9 @@ public class T_AttenceServiceImpl implements T_AttenceService {
     public List<T_Attence> get_AllAttenceCuu(Map<String, Object> data) {
         return tam.get_AllAttenceCuu(data);
     }
+
+    @Override
+    public List<T_Attence> get_AllAttenceByMoth(T_Attence t_attence) {
+        return tam.get_AllAttenceByMoth(t_attence);
+    }
 }

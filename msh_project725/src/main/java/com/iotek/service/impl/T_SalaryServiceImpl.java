@@ -17,8 +17,9 @@ public class T_SalaryServiceImpl implements T_SalaryService{
     @Resource
     private T_SalaryMapper tsm;
 
+
     @Override
-    public T_Salary getT_SalaryByDay10(T_Salary t_salary) {
+    public List<T_Salary> getT_SalaryByDay10(T_Salary t_salary) {
         return tsm.getT_SalaryByDay10(t_salary);
     }
 

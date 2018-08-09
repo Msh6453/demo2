@@ -2,8 +2,10 @@ package com.iotek.controller.manager;
 
 import com.iotek.model.T_Dept;
 import com.iotek.model.T_Emp;
+import com.iotek.model.T_Position;
 import com.iotek.service.T_DeptService;
 import com.iotek.service.T_EmpService;
+import com.iotek.service.T_PositionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import utils.DoPage;
@@ -25,6 +27,8 @@ public class T_DeptController {
     private T_DeptService tds;
     @Resource
     private T_EmpService tes;
+    @Resource
+    private T_PositionService tps;
     @RequestMapping("/getdept")
     public String  getTdeptsAll(int currentPage,HttpServletRequest request)throws Exception{
         List<T_Dept> tDepts=tds.getTdeptAll();
@@ -78,9 +82,19 @@ public class T_DeptController {
         }else{
             T_Dept tDept=new T_Dept();
             tDept.setD_id(d_id);
+            //删除部门的同时需要删除部门下的职位
             boolean falg=tds.deleteT_Dept(tDept);
+            T_Position tp=new T_Position();
+            tp.setD_id(d_id);
+            List<T_Position> list=tps.getPositions(tp);
+            for (int i = 0; i <list.size() ; i++) {
+                int pid=list.get(i).getP_id();
+                T_Position tp1=new T_Position();
+                tp1.setP_id(pid);
+                boolean falg1=tps.deleteT_Pos(tp1);
+            }
             return getTdeptsAll( currentPage, request);
-    }
+        }
     }
     //跳转部门信息添加页面
     @RequestMapping("/savedept")

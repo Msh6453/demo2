@@ -29,6 +29,15 @@ public class T_ResumeController {
     private T_FeedbackService tfs;
     @RequestMapping("/saveResume")
     public String save(T_Resume t_resume,HttpSession session, HttpServletRequest request)throws Exception{
+        if (t_resume.getRe_name()==""||t_resume.getRe_age()==0||t_resume.getRe_sex()==""||
+                t_resume.getRe_birday()==""||t_resume.getRe_major()==""||t_resume.getRe_edu()==""||
+                t_resume.getRe_endtime()==""||t_resume.getRe_hobby()==""||t_resume.getRe_tel()==""||
+                t_resume.getRe_address()==""||t_resume.getRe_experience()==""||t_resume.getRe_skill()==""){
+            int currentPage=1;
+
+            request.setAttribute("nokong","字段不能为空！");
+            return getresume(currentPage, request, session);
+        }
         T_Tourist tourist= (T_Tourist) session.getAttribute("tour");
         t_resume.setT_id(tourist.getT_id());
         boolean falg=ts.saveResume(t_resume);

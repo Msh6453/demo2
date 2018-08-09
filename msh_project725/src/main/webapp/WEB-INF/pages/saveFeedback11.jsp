@@ -53,6 +53,12 @@
         span{
             position: relative;
         }
+        #te1,#te2,#tel3,#tel4{
+            resize: none;
+        }
+        td{
+            text-align: center;
+        }
     </style>
     <script src="jq-resources/jquery.js"></script>
     <script>
@@ -137,6 +143,8 @@
                     </td>
                     <td  style="width: 30px">
                             <textarea id="tel3" name="re_skill" cols="100" rows="10"
+                                      style="width:100px; height:50px"><%=tr.get(i).getRe_skill()%>
+                            </textarea>
                       </tr>
                 <%
                         }

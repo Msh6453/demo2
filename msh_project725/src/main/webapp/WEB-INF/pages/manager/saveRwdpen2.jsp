@@ -63,27 +63,40 @@
     <script src="jq-resources/jquery.js"></script>
     <script>
         $(function () {
-            $("#8").blur(function () {
-                var p = $("#8").val();
+            $("#n8").blur(function () {
+                var p = $("#n8").val();
                 var reg = /^[1-9]\d*$/;
                 if (reg.test(p)) {
-                    $("#8").css('border','2px solid green');
+                    $("#n8").css('border','2px solid green');
                     $("#n10").removeAttr("disabled")
                 } else {
-                    $("#8").css('border','1px solid red');
+                    $("#n8").css('border','1px solid red');
                     $("#n10").attr("disabled", "a")
                 }
             })
         })
         $(function () {
-            $("#9").blur(function () {
-                var p = $("#9").val();
+            $("#pos").blur(function () {
+                var p = $("#pos").val();
                 var reg = /\S/;
                 if (reg.test(p)) {
-                    $("#9").css('border','2px solid green');
+                    $("#n10").removeAttr("disabled")
+                    $("#pos").css('border','2px solid green');
+                } else {
+                    $("#n10").attr("disabled", "a")
+                    $("#pos").css('border','1px solid red');
+                }
+            })
+        })
+        $(function () {
+            $("#n9").blur(function () {
+                var p = $("#n9").val();
+                var reg = /\S/;
+                if (reg.test(p)) {
+                    $("#n9").css('border','2px solid green');
                     $("#n10").removeAttr("disabled")
                 } else {
-                    $("#9").css('border','1px solid red');
+                    $("#n9").css('border','1px solid red');
                     $("#n10").attr("disabled", "a")
                 }
             })
@@ -148,19 +161,23 @@
                     </tr>
                     <tr>
                         <td><label>金钱</label></td>
-                        <td><input type="text" id="n9"   name="rp_money" ></td>
+                        <td><input type="text" id="n8"   name="rp_money" ></td>
                     </tr>
                     <tr>
                         <td><label>原因</label></td>
-                        <td>  <textarea id="te2" id="n8"   name="rp_reason" cols="100" rows="10"
+                        <td><input type="text" id="n9"    name="rp_reason" ></td>
+                        <%--<td>  <textarea id="te2" id="n9"   name="rp_reason" cols="100" rows="10"
                                         style="width:200px; height:50px" >
                             </textarea>
-                        </td>
+                        </td>--%>
                     </tr>
                 </table>
-                <input id="n10"  type="submit" value="提交">
+                <input id="n10" disabled="disabled"  type="submit" value="提交">
             </form>
+
             ${requestScope.noid}
+            ${requestScope.noxx}
+            ${requestScope.noemp}
         </div>
     </div>
 </div>

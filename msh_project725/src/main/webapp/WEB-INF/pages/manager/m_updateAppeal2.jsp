@@ -131,7 +131,8 @@
                     </tr>
                 </table>
                 <input type="hidden" name="app_id" value="<%=ta.getApp_id()%>">
-                <input id="n10"  type="submit" value="提交">
+                <input type="hidden" name="app_state" value="1">
+                <input id="n10" disabled="disabled" type="submit" value="提交">
             </form>
         </div>
     </div>
